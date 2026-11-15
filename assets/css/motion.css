@@ -1,0 +1,127 @@
+/* ==========================================================================
+   Capa de movimiento del portafolio.
+   Idea: la hoja se dibuja sola. Las reglas se trazan como en un plóter,
+   después se asienta la tipografía y las láminas (figuras) se descubren.
+
+   - Todo lo que oculta contenido vive bajo .js (lo pone un script en <head>)
+     y bajo prefers-reduced-motion: no-preference. Sin JavaScript, o con
+     "reducir movimiento" activado, la página se ve completa y estática.
+   - Solo se animan transform, opacity, clip-path y scale/translate.
+   - Para desactivar todas las animaciones: quita el <link> a este archivo
+     en build.mjs.
+   ========================================================================== */
+
+:root{
+  --ease-out:cubic-bezier(.23,1,.32,1);      /* entradas y respuestas */
+  --ease-in-out:cubic-bezier(.77,0,.175,1);  /* trazos y movimientos en pantalla */
+}
+
+/* ---------- 1. Reglas trazables ----------
+   El borde superior de cada sección pasa a ser una línea propia (::before)
+   para poder dibujarla de izquierda a derecha. */
+:is(.ix,.story,.facts,.kpis,.pager,.list,.block:has(>h2)){position:relative;border-top:0}
+:is(.ix,.story,.facts,.kpis,.pager,.list,.block:has(>h2))::before{content:"";position:absolute;left:0;right:0;top:0;
+  border-top:1px solid var(--ink);transform-origin:left center;pointer-events:none}
+.block>h2,.list h2{border-top:0}
+.credits::before{border-top-color:var(--rule)}
+
+/* ---------- 2. Respuesta al pulsar (todas las entradas: ratón, dedo, teclado) ---------- */
+.sheet,.lang a,.pager a{transition:transform .14s var(--ease-out)}
+.sheet:active{transform:scale(.985)}
+.lang a:active,.pager a:active{transform:scale(.96)}
+
+/* ---------- 3. Progreso de lectura en las hojas de proyecto ----------
+   Lo mueve el propio desplazamiento del usuario; no es una animación autónoma. */
+@keyframes read-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@supports (animation-timeline:scroll()){
+  .is-project .top::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--signal);
+    transform-origin:left center;animation:read-progress linear both;animation-timeline:scroll(root)}
+}
+
+/* ---------- 4. Transición entre páginas (navegadores con View Transitions) ---------- */
+@keyframes vt-out{to{opacity:0}}
+@keyframes vt-in{from{opacity:0}}
+::view-transition-old(root){animation:vt-out .18s var(--ease-out) both}
+::view-transition-new(root){animation:vt-in .34s var(--ease-out) .05s both}
+::view-transition-group(lang-pill){animation-duration:.4s;animation-timing-function:var(--ease-in-out)}
+
+/* ---------- fotogramas de entrada (solo "from": el final es el estilo normal) ---------- */
+@keyframes fade-in{from{opacity:0}}
+@keyframes rise-in{from{opacity:0;transform:translateY(16px)}}
+@keyframes word-rise{from{transform:translateY(110%)}}
+@keyframes draw-x{from{transform:scaleX(0)}}
+@keyframes strip-pan{from{translate:0 -5%}to{translate:0 5%}}
+
+@media screen and (prefers-reduced-motion:no-preference){
+
+  @view-transition{navigation:auto}
+  .top{view-transition-name:site-top}
+  .lang a[aria-current]{view-transition-name:lang-pill}
+
+  /* ---------- 5. Secuencia de entrada de la cabecera de página (CSS puro) ---------- */
+  /* Titular: cada palabra sube desde detrás de su línea base. */
+  .w{display:inline-block;vertical-align:top;overflow:hidden;padding:.16em .04em .22em;margin:-.16em -.04em -.22em}
+  .w>span{display:inline-block;animation:word-rise .85s var(--ease-out) backwards;animation-delay:calc(90ms + var(--i)*65ms)}
+  .proj-head .w>span{animation-delay:calc(120ms + var(--i)*45ms)}
+
+  /* Vista general */
+  .hero .eyebrow{animation:fade-in .6s var(--ease-out) backwards}
+  .headline{animation:rise-in .7s var(--ease-out) .36s backwards}
+  .profile{animation:rise-in .7s var(--ease-out) .46s backwards}
+  .facts::before{animation:draw-x 1s var(--ease-in-out) .3s backwards}
+  .facts>*{animation:rise-in .6s var(--ease-out) .55s backwards}
+  .facts>:nth-child(n+3){animation-delay:.62s}
+  .facts>:nth-child(n+5){animation-delay:.69s}
+  .facts>:nth-child(n+7){animation-delay:.76s}
+
+  /* Hoja de proyecto */
+  .crumb{animation:fade-in .5s var(--ease-out) backwards}
+  .proj-head .eyebrow{animation:fade-in .6s var(--ease-out) .05s backwards}
+  .lead{animation:rise-in .7s var(--ease-out) .45s backwards}
+  .notice{animation:rise-in .7s var(--ease-out) .55s backwards}
+  .metric .num{animation:rise-in .8s var(--ease-out) .5s backwards}
+  .metric-label{animation:rise-in .7s var(--ease-out) .62s backwards}
+  .metric-note{animation:rise-in .7s var(--ease-out) .7s backwards}
+  .kpis::before{animation:draw-x 1s var(--ease-in-out) .55s backwards}
+  .kpis li{animation:rise-in .6s var(--ease-out) .7s backwards}
+  .kpis li:nth-child(2){animation-delay:.77s}
+  .kpis li:nth-child(3){animation-delay:.84s}
+  .kpis li:nth-child(n+4){animation-delay:.91s}
+
+  /* ---------- 6. Aparición al desplazarse (site.js añade .in) ---------- */
+  /* Listas que entran como listas: suben escalonadas. */
+  .js :is(.sheets>li,.mo,.story-col,.steps>li,.list>*){
+    transition:opacity .7s var(--ease-out) var(--rd,0ms),transform .8s var(--ease-out) var(--rd,0ms)}
+  .js :is(.sheets>li,.mo,.story-col,.steps>li,.list>*):not(.in){opacity:0;transform:translateY(22px)}
+
+  /* Texto y datos: solo aparecen, sin moverse. */
+  .js :is(.ix>*,.more-h,.meta,.block>h2,.block-intro,.prose,.table-wrap,.table-note,.credits p,.pager>*,.foot>div,.fig figcaption){
+    transition:opacity .7s var(--ease-out) var(--rd,0ms)}
+  .js :is(.ix>*,.more-h,.meta,.block>h2,.block-intro,.prose,.table-wrap,.table-note,.credits p,.pager>*,.foot>div,.fig figcaption):not(.in){opacity:0}
+  .js .pager a{transition:opacity .7s var(--ease-out) var(--rd,0ms),transform .14s var(--ease-out)}
+
+  /* Reglas de sección: se trazan. */
+  .js :is(.ix,.story,.pager,.list,.block:has(>h2))::before{transition:transform 1.1s var(--ease-in-out)}
+  .js :is(.ix,.story,.pager,.list,.block:has(>h2)):not(.in)::before{transform:scaleX(0)}
+
+  /* Figuras: la lámina se descubre de arriba abajo y la imagen se asienta. */
+  .js .fig .fig-media{transition:clip-path 1.1s var(--ease-in-out) var(--rd,0ms)}
+  .js .fig:not(.in) .fig-media{clip-path:inset(0 0 100% 0)}
+  .js .fig.in .fig-media{clip-path:inset(0 0 0 0)}
+  .js .fig img{transition:scale 1.5s var(--ease-out) var(--rd,0ms)}
+  .js .fig:not(.in) img{scale:1.06}
+
+  /* ---------- 7. Tiras de los recuadros ---------- */
+  @media (hover:hover) and (pointer:fine){
+    .strip img,.strip svg{transition:scale .9s var(--ease-out)}
+    .sheet:hover .strip img{scale:1.07}
+    .sheet:hover .strip svg{scale:1.04}
+  }
+  /* Paralaje leve ligado al desplazamiento, donde el navegador lo admite. */
+  @supports (animation-timeline:view()){
+    .strip img{scale:1.12;animation:strip-pan linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+    @media (hover:hover) and (pointer:fine){
+      .sheet:hover .strip img{scale:1.19}
+    }
+  }
+}

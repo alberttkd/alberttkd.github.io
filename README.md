@@ -15,6 +15,8 @@ content/
   diagrams/            Diagramas SVG de las tiras de los recuadros
 assets/
   css/site.css         Diseño (sistema visual "Messbild" adaptado a pantalla)
+  css/motion.css       Animaciones (entrada, aparición al desplazarse, transición entre páginas)
+  js/site.js           Idioma recordado, aparición al desplazarse y conteo de la cifra principal
   img/                 Figuras y tiras
   fonts/               Fuentes locales
 build.mjs              Genera el sitio en dist/ a partir de content/ y assets/
@@ -118,6 +120,20 @@ los datos de disponibilidad e idiomas, la fecha de actualización (`updated`) y 
 (`baseUrl`). Si el sitio se muda a otra dirección, hay que cambiar `baseUrl`: se usa para el mapa del
 sitio y las etiquetas `canonical` y `hreflang`. Las rutas internas son relativas, así que el sitio
 funciona igual en un subdirectorio.
+
+## Animaciones
+
+Todo el movimiento está en `assets/css/motion.css` y `assets/js/site.js`. La idea es que la hoja
+«se dibuja sola»: las reglas se trazan, el titular sube palabra a palabra, las figuras se descubren
+de arriba abajo y la cifra principal cuenta hasta su valor.
+
+- No hay que hacer nada al añadir proyectos: las animaciones se aplican solas a los bloques nuevos.
+- Con «reducir movimiento» activado en el sistema, o sin JavaScript, la página se muestra completa
+  y estática.
+- Para cambiar el carácter general, edita las dos curvas del principio de `motion.css`
+  (`--ease-out` y `--ease-in-out`) y las duraciones de cada regla.
+- Para desactivar todas las animaciones, borra en `build.mjs` la línea
+  `<link rel="stylesheet" href="${up}assets/css/motion.css">`.
 
 ## Reglas de contenido
 

@@ -83,11 +83,15 @@ function diagram(name, labels, lang, where) {
   return svg.replace(/\{\{(\w+)\}\}/g, (_, k) => esc(tr(labels?.[k], lang, `${where}.labels.${k}`)));
 }
 
+// Titulares: cada palabra en su propio <span> para la entrada animada (ver assets/css/motion.css).
+const words = (s) => String(s).split(/\s+/).filter(Boolean)
+  .map((w, i) => `<span class="w" style="--i:${i}"><span>${esc(w)}</span></span>`).join(' ');
+
 const ui = (key, lang) => tr(site.ui[key], lang, `site.json ui.${key}`);
 const hostOf = (url) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 
 // ───────────────────────────── plantilla común ─────────────────────────────
-function shell({ lang, depth, slug, title, description, body }) {
+function shell({ lang, depth, slug, title, description, body, pageClass = '' }) {
   const up = '../'.repeat(depth);
   const pagePath = (l) => `${l}/${slug ? slug + '/' : ''}`;
   const alternates = LANGS.map((l) => `<link rel="alternate" hreflang="${l}" href="${BASE}${pagePath(l)}">`).join('\n');
@@ -100,7 +104,7 @@ function shell({ lang, depth, slug, title, description, body }) {
 <html lang="${lang}">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${BASE}${pagePath(lang)}">
@@ -115,15 +119,26 @@ ${alternates}
 <link rel="icon" href="${up}assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${up}assets/fonts/Archivo-normal-100-900-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${up}assets/fonts/IBMPlexSans-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+/* Activa las animaciones de aparición solo si el navegador puede ejecutarlas; si site.js no llega a cargar, se muestra todo. */
+(function (d) {
+  if (!('IntersectionObserver' in window)) return;
+  d.classList.add('js');
+  setTimeout(function () { if (!window.__motionReady) d.classList.remove('js'); }, 2500);
+})(document.documentElement);
+</script>
 <link rel="stylesheet" href="${up}assets/css/site.css">
+<link rel="stylesheet" href="${up}assets/css/motion.css">
 </head>
-<body>
+<body${pageClass ? ` class="${pageClass}"` : ''}>
 <a class="skip" href="#main">${esc(ui('skip', lang))}</a>
-<div class="page">
 <header class="top">
-  <a class="top-name" href="${up}${lang}/">${esc(p.name)}</a>
-  <nav class="lang" aria-label="${esc(ui('langLabel', lang))}"><ul>${langNav}</ul></nav>
+  <div class="top-in">
+    <a class="top-name" href="${up}${lang}/">${esc(p.name)}</a>
+    <nav class="lang" aria-label="${esc(ui('langLabel', lang))}"><ul>${langNav}</ul></nav>
+  </div>
 </header>
+<div class="page">
 <main id="main">
 ${body}
 </main>
@@ -191,7 +206,7 @@ function overviewPage(lang) {
   const body = `<section class="hero">
   <div class="hero-main">
     <p class="eyebrow">${esc(ui('overview', lang))}</p>
-    <h1 class="name">${esc(p.name)}</h1>
+    <h1 class="name">${words(p.name)}</h1>
     <p class="headline">${fmt(tr(pr.headline, lang, `${w}.headline`))}</p>
     <p class="profile">${fmt(tr(pr.intro, lang, `${w}.intro`))}</p>
   </div>
@@ -217,7 +232,7 @@ ${more}
 <script type="application/ld+json">${jsonLd}</script>`;
 
   return shell({
-    lang, depth: 1, slug: '',
+    lang, depth: 1, slug: '', pageClass: 'is-overview',
     title: `${p.name} · ${tr(pr.headline, lang, `${w}.headline`)}`,
     description: tr(pr.intro, lang, `${w}.intro`),
     body,
@@ -320,7 +335,7 @@ function projectPage(pj, index, lang) {
 </nav>
 <header class="proj-head">
   <p class="eyebrow"><span class="no">${pj.no}</span> ${fmt(T(pj.title, 'title'))} <span class="sep">/</span> ${fmt(T(pj.kind, 'kind'))}</p>
-  <h1>${fmt(T(pj.headline, 'headline'))}</h1>
+  <h1>${words(T(pj.headline, 'headline'))}</h1>
   <p class="lead">${fmt(T(pj.lead, 'lead'))}</p>
   ${pj.notice ? `<p class="notice">${fmt(T(pj.notice, 'notice'))}</p>` : ''}
 </header>
@@ -342,7 +357,7 @@ ${credits}
 </nav>`;
 
   return shell({
-    lang, depth: 2, slug: pj.slug,
+    lang, depth: 2, slug: pj.slug, pageClass: 'is-project',
     title: `${T(pj.title, 'title')} · ${site.person.name}`,
     description: T(pj.summary, 'summary'),
     body,
