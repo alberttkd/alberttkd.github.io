@@ -21,6 +21,7 @@ assets/
   fonts/               Fuentes locales
 build.mjs              Genera el sitio en dist/ a partir de content/ y assets/
 tools/check.mjs        Comprueba enlaces, imágenes e idioma del sitio generado
+tools/og-image.mjs     Genera la imagen de vista previa para enlaces (assets/img/og-<idioma>.png)
 .github/workflows/     Despliegue automático en GitHub Pages
 ```
 
@@ -134,6 +135,13 @@ de arriba abajo y la cifra principal cuenta hasta su valor.
   (`--ease-out` y `--ease-in-out`) y las duraciones de cada regla.
 - Para desactivar todas las animaciones, borra en `build.mjs` la línea
   `<link rel="stylesheet" href="${up}assets/css/motion.css">`.
+
+## Imagen de vista previa (LinkedIn, WhatsApp...)
+
+`assets/img/og-es.png`, `og-en.png` y `og-de.png` (1200 × 627 px) son la imagen que muestran las
+redes al compartir un enlace al sitio. El generador las declara en cada página como `og:image`; la
+portada (`/`) usa la del idioma por defecto. Si cambian el nombre, el titular o los proyectos,
+vuelve a crearlas con `node tools/og-image.mjs` (necesita Edge o Chrome instalados) y publica.
 
 ## Reglas de contenido
 

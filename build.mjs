@@ -90,6 +90,19 @@ const words = (s) => String(s).split(/\s+/).filter(Boolean)
 const ui = (key, lang) => tr(site.ui[key], lang, `site.json ui.${key}`);
 const hostOf = (url) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 
+// Imagen de vista previa para enlaces compartidos (LinkedIn, WhatsApp...). La genera tools/og-image.mjs.
+function ogImageTags(lang) {
+  const file = `assets/img/og-${lang}.png`;
+  if (!existsSync(join(ROOT, file))) return '';
+  const size = imageSize(file);
+  return `<meta property="og:image" content="${BASE}${file}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="${size.w}">
+<meta property="og:image:height" content="${size.h}">
+<meta property="og:image:alt" content="${esc(site.person.name)} · ${esc(tr(site.profile.headline, lang, 'profile.headline'))}">
+<meta name="twitter:card" content="summary_large_image">`;
+}
+
 // ───────────────────────────── plantilla común ─────────────────────────────
 function shell({ lang, depth, slug, title, description, body, pageClass = '' }) {
   const up = '../'.repeat(depth);
@@ -115,6 +128,7 @@ ${alternates}
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${BASE}${pagePath(lang)}">
 <meta property="og:locale" content="${lang}">
+${ogImageTags(lang)}
 <meta name="theme-color" content="#F3F0E8">
 <link rel="icon" href="${up}assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${up}assets/fonts/Archivo-normal-100-900-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -375,6 +389,12 @@ function rootPage() {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(site.person.name)}</title>
 <meta name="description" content="${esc(tr(site.profile.intro, def, 'profile.intro'))}">
+<link rel="canonical" href="${BASE}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="${esc(site.person.name)} · ${esc(tr(site.profile.headline, def, 'profile.headline'))}">
+<meta property="og:description" content="${esc(tr(site.profile.intro, def, 'profile.intro'))}">
+<meta property="og:url" content="${BASE}">
+${ogImageTags(def)}
 ${LANGS.map((l) => `<link rel="alternate" hreflang="${l}" href="${BASE}${l}/">`).join('\n')}
 <link rel="alternate" hreflang="x-default" href="${BASE}${def}/">
 <script>
