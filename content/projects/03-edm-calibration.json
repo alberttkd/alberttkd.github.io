@@ -1,0 +1,298 @@
+{
+  "slug": "edm-calibration",
+  "title": { "es": "Calibración de distanciómetros (EDM)", "en": "EDM calibration", "de": "EDM-Kalibrierung" },
+  "kind": { "es": "Prototipo académico, repositorio público", "en": "Academic prototype, public repository", "de": "Prototyp, öffentliches Repository" },
+  "summary": {
+    "es": "Ajuste ponderado por mínimos cuadrados en una línea base de 7 pilares: 21 observaciones, 7 incógnitas con la constante aditiva, prueba χ² y presupuesto GUM.",
+    "en": "Weighted least squares on a 7-pillar baseline: 21 observations, 7 unknowns including the additive constant, χ² test, GUM budget.",
+    "de": "Gewichtete Ausgleichung auf einer 7-Pfeiler-Basislinie: 21 Beobachtungen, 7 Unbekannte mit Additionskonstante, χ²-Test, GUM."
+  },
+  "stack": "JavaScript, math.js, Leaflet, jsPDF",
+  "strip": {
+    "svg": "edm-baseline",
+    "caption": {
+      "es": "Las 21 distancias entre 7 pilares, esquemático",
+      "en": "All 21 distances between 7 pillars, schematic",
+      "de": "Alle 21 Strecken zwischen 7 Pfeilern, schematisch"
+    }
+  },
+
+  "repo": "https://github.com/alberttkd/edm-baseline-calibration",
+
+  "headline": {
+    "es": "Calibración de distanciómetros en una línea base de 7 pilares",
+    "en": "Calibrating EDM instruments on a 7-pillar baseline",
+    "de": "Kalibrierung von EDM-Distanzmessern auf einer 7-Pfeiler-Basislinie"
+  },
+  "lead": {
+    "es": "La constante aditiva δ a partir de 21 distancias observadas: ajuste ponderado por mínimos cuadrados, prueba χ² global y presupuesto de incertidumbre según la GUM. Todo se ejecuta en el navegador.",
+    "en": "The additive constant δ from 21 observed distances: weighted least squares, a global χ² test and a GUM uncertainty budget. Everything runs in the browser.",
+    "de": "Die Additionskonstante δ aus 21 beobachteten Strecken: gewichtete Ausgleichung, globaler χ²-Test und Unsicherheitsbudget nach GUM. Alles läuft im Browser."
+  },
+  "notice": {
+    "es": "Estado: prototipo académico, no es un procedimiento de calibración acreditado. Las separaciones entre pilares del repositorio son valores provisionales (placeholders).",
+    "en": "Status: academic prototype, not an accredited calibration procedure. The pillar spacings in the repository are placeholders.",
+    "de": "Status: akademischer Prototyp, kein akkreditiertes Kalibrierverfahren. Die Pfeilerabstände im Repository sind Platzhalter."
+  },
+
+  "metric": {
+    "value": "14",
+    "label": {
+      "es": "grados de libertad: ν = n − u = 21 − 7.",
+      "en": "degrees of freedom: ν = n − u = 21 − 7.",
+      "de": "Freiheitsgrade: ν = n − u = 21 − 7."
+    },
+    "note": {
+      "es": "21 distancias, 7 incógnitas. Solo la redundancia hace posibles la prueba global y el análisis de residuos.",
+      "en": "21 distances, 7 unknowns. Only the redundancy makes a global test and residual screening possible.",
+      "de": "21 Strecken, 7 Unbekannte. Erst die Überbestimmung macht Globaltest und Residuenanalyse möglich."
+    }
+  },
+  "facts": [
+    {
+      "value": "21",
+      "label": {
+        "es": "distancias observadas: todas las combinaciones C(7,2) entre los 7 pilares.",
+        "en": "observed distances: all C(7,2) combinations between the 7 pillars.",
+        "de": "beobachtete Strecken: alle C(7,2) Kombinationen zwischen den 7 Pfeilern."
+      }
+    },
+    {
+      "value": "7",
+      "label": {
+        "es": "incógnitas: los 6 tramos y la constante δ, que es la misma en las 21 distancias.",
+        "en": "unknowns: the 6 segments and the constant δ, which is the same in all 21 distances.",
+        "de": "Unbekannte: die 6 Teilstrecken und die Konstante δ, die in allen 21 Strecken gleich ist."
+      }
+    },
+    {
+      "value": { "es": "13,40", "en": "13.40", "de": "13,40" },
+      "label": {
+        "es": "estadístico de prueba χ²(14) con datos simulados: el modelo a priori no se rechaza.",
+        "en": "test statistic χ²(14) with simulated data: the a priori model is not rejected.",
+        "de": "Teststatistik χ²(14) mit simulierten Daten: Das A-priori-Modell wird nicht verworfen."
+      }
+    }
+  ],
+
+  "story": {
+    "problem": {
+      "es": "Todo distanciómetro electrónico mide cada distancia con un error constante: la constante aditiva δ. El procedimiento de referencia (Fernández Pareja 2015) supone una línea base larga, con separaciones iguales y pesos unitarios. La línea base de la Universidad del Quindío es corta y está dividida de forma desigual.",
+      "en": "Every electronic distance meter is off by a constant amount on every distance: the additive constant δ. The reference procedure (Fernández Pareja 2015) assumes a long baseline with equal spacing and unit weights. The Universidad del Quindío baseline is short and unevenly divided.",
+      "de": "Jeder elektronische Distanzmesser misst jede Strecke um eine konstante Größe falsch: die Additionskonstante δ. Das Referenzverfahren (Fernández Pareja 2015) setzt eine lange Basis mit gleichen Abständen und Einheitsgewichten voraus. Die Basis der Universidad del Quindío ist kurz und ungleich geteilt."
+    },
+    "approach": {
+      "es": "Observar las 21 distancias entre los 7 pilares. Las incógnitas son los 6 tramos y δ. Los pesos salen de la especificación del fabricante a + b·D y de la incertidumbre de centrado; la solución es un ajuste ponderado por mínimos cuadrados.",
+      "en": "Observe all 21 distances between the 7 pillars. The unknowns are the 6 segments and δ. Weights come from the manufacturer spec a + b·D and the centring uncertainty; the solution is a weighted least-squares adjustment.",
+      "de": "Alle 21 Strecken zwischen den 7 Pfeilern beobachten. Unbekannt sind die 6 Teilstrecken und δ. Gewichte aus der Herstellerangabe a + b·D und der Zentrierunsicherheit, Lösung durch gewichtete Ausgleichung."
+    },
+    "result": {
+      "es": "Una herramienta web: ajuste, prueba global, análisis de residuos, presupuesto GUM e informe en PDF. Una especificación matemática escrita es la referencia del código. Además, un artículo y una guía de campo para estudiantes.",
+      "en": "A web tool: adjustment, global test, residual screening, GUM budget and a PDF report. A written mathematical specification is the reference for the code. Plus a paper and a field guide for students.",
+      "de": "Ein Web-Werkzeug: Ausgleichung, Globaltest, Residuenanalyse, GUM-Budget und PDF-Protokoll. Eine schriftliche mathematische Spezifikation ist die Referenz für den Code. Dazu Artikel und Feldanleitung für Studierende."
+    }
+  },
+
+  "meta": [
+    {
+      "label": { "es": "Rol", "en": "Role", "de": "Rolle" },
+      "value": {
+        "es": "Autor: formulación, especificación, implementación, artículo y guía de campo (revisados por el docente de Metrología, Ing. Darío F. Londoño Pinilla).",
+        "en": "Author: formulation, specification, implementation, paper and field guide (reviewed by the metrology lecturer, Ing. Darío F. Londoño Pinilla).",
+        "de": "Autor: Formulierung, Spezifikation, Implementierung, Artikel und Feldanleitung (geprüft vom Dozenten für Metrologie, Ing. Darío F. Londoño Pinilla)."
+      }
+    },
+    {
+      "label": { "es": "Herramientas", "en": "Tools", "de": "Werkzeuge" },
+      "value": {
+        "es": "JavaScript (módulos ES), Leaflet/OSM, math.js solo para N⁻¹ [7×7], jsPDF. Sin servidor ni framework.",
+        "en": "JavaScript (ES modules), Leaflet/OSM, math.js only for N⁻¹ [7×7], jsPDF. No server, no framework.",
+        "de": "JavaScript (ES-Module), Leaflet/OSM, math.js nur für N⁻¹ [7×7], jsPDF. Kein Server, kein Framework."
+      }
+    },
+    {
+      "label": { "es": "Contexto", "en": "Context", "de": "Kontext" },
+      "value": {
+        "es": "Metrología, Universidad del Quindío, 2025/26. Monitor de la asignatura de 08/2025 a 05/2026: tutorías semanales para unos 60 estudiantes y material docente sobre incertidumbre de medida (GUM), calibración y verificación de instrumentos.",
+        "en": "Metrology, Universidad del Quindío, 2025/26. Teaching assistant from 08/2025 to 05/2026: weekly tutorials for around 60 students, teaching material on measurement uncertainty (GUM), calibration and instrument checks.",
+        "de": "Fachgebiet Metrologie, Universidad del Quindío, 2025/26. Tutor von 08/2025 bis 05/2026: wöchentliche Tutorien für rund 60 Studierende, Lehrmaterial zu Messunsicherheit (GUM), Kalibrierung und Instrumentenprüfung."
+      }
+    },
+    {
+      "label": { "es": "Licencia", "en": "Licence", "de": "Lizenz" },
+      "value": { "es": "Aún por definir.", "en": "Still pending.", "de": "Noch offen." }
+    },
+    {
+      "label": { "es": "Bases", "en": "Basis", "de": "Grundlagen" },
+      "value": "Fernández Pareja (2015); ISO 17123-4; JCGM 100:2008."
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "figure",
+      "wide": true,
+      "title": { "es": "Plan de observación", "en": "Observation plan", "de": "Beobachtungsplan" },
+      "src": { "de": "assets/img/edm-baseline-de.png", "en": "assets/img/edm-baseline-en.png" },
+      "alt": {
+        "es": "Siete pilares P1 a P7 sobre una línea de unos 120 m con separaciones desiguales; arcos unen todas las parejas de pilares. El arco de P2 a P5 está resaltado como ejemplo: x25 = d23 + d34 + d45 − δ.",
+        "en": "Seven pillars P1 to P7 on a line of about 120 m with unequal spacing; arcs join every pair of pillars. The arc from P2 to P5 is highlighted as an example: x25 = d23 + d34 + d45 − δ.",
+        "de": "Sieben Pfeiler P1 bis P7 auf einer Linie von etwa 120 m mit ungleichen Abständen; Bögen verbinden alle Pfeilerpaare. Der Bogen von P2 nach P5 ist als Beispiel hervorgehoben: x25 = d23 + d34 + d45 − δ."
+      },
+      "caption": {
+        "es": "Plan de observación de la línea base de calibración de la Universidad del Quindío, Armenia (Colombia). Arcos: las 21 distancias; cuadrados: pilares de hormigón con centrado forzoso; en rojo, el ejemplo (2,5), fila 9 de la matriz A. Separaciones dibujadas a escala según los valores provisionales de `js/config.js` (suma 120,219 m), no levantadas en campo. P1: 4,554609° N, 75,658899° W (WGS84, EPSG:4326).",
+        "en": "Observation plan of the Universidad del Quindío calibration baseline, Armenia (Colombia). Arcs: the 21 distances; squares: concrete pillars with forced centring; red: example (2,5), row 9 of matrix A. Spacing drawn to scale from the placeholder values in `js/config.js` (sum 120.219 m), not surveyed. P1: 4.554609° N, 75.658899° W (WGS84, EPSG:4326).",
+        "de": "Beobachtungsplan der Kalibrierbasis der Universidad del Quindío, Armenia (Kolumbien). Bögen: die 21 Strecken; Quadrate: Betonpfeiler mit Zwangszentrierung; rot: Beispiel (2,5), Zeile 9 der Matrix A. Abstände maßstäblich nach den Platzhalterwerten in `js/config.js` (Summe 120,219 m), nicht vermessen. P1: 4,554609° N, 75,658899° W (WGS84, EPSG:4326)."
+      }
+    },
+    {
+      "type": "steps",
+      "title": {
+        "es": "Del modelo de observación al presupuesto de incertidumbre",
+        "en": "From observation model to uncertainty budget",
+        "de": "Vom Beobachtungsmodell zum Unsicherheitsbudget"
+      },
+      "intro": {
+        "es": "Modelo funcional: cada distancia observada es la suma de los tramos que abarca menos δ. La matriz de diseño A es de 21 × 7 y de rango 7. El instrumento devuelve lectura = distancia + δ; en el código, δ entra con coeficiente −1. Modelo estocástico: σᵢ² = (a + b·Dᵢ)² + 2σc², con σc = e_cf / √3 y W = Σ_L⁻¹.",
+        "en": "Functional model: each observed distance is the sum of the segments it spans minus δ. The design matrix A is 21 × 7 with rank 7. The instrument returns reading = distance + δ; the code enters δ with coefficient −1. Stochastic model: σᵢ² = (a + b·Dᵢ)² + 2σc², with σc = e_cf / √3 and W = Σ_L⁻¹.",
+        "de": "Funktionales Modell: Jede beobachtete Strecke ist die Summe der überspannten Teilstrecken minus δ. Die Designmatrix A hat 21 × 7 Elemente und Rang 7. Das Instrument liefert Lesung = Strecke + δ; im Code steht δ mit dem Koeffizienten −1. Stochastisches Modell: σᵢ² = (a + b·Dᵢ)² + 2σc², mit σc = e_cf / √3 und W = Σ_L⁻¹."
+      },
+      "items": [
+        {
+          "title": { "es": "Ajustar", "en": "Adjust", "de": "Ausgleichen" },
+          "text": {
+            "es": "ŷ = (AᵀWA)⁻¹AᵀWx y Q = (AᵀWA)⁻¹. Control: ‖AᵀWr‖ → 0.",
+            "en": "ŷ = (AᵀWA)⁻¹AᵀWx and Q = (AᵀWA)⁻¹. Check: ‖AᵀWr‖ → 0.",
+            "de": "ŷ = (AᵀWA)⁻¹AᵀWx und Q = (AᵀWA)⁻¹. Kontrolle: ‖AᵀWr‖ → 0."
+          }
+        },
+        {
+          "title": { "es": "Prueba global", "en": "Test globally", "de": "Global testen" },
+          "text": {
+            "es": "T = ν·s₀² ~ χ²(14), α = 0,05.",
+            "en": "T = ν·s₀² ~ χ²(14), α = 0.05.",
+            "de": "T = ν·s₀² ~ χ²(14), α = 0,05."
+          }
+        },
+        {
+          "title": { "es": "Revisar residuos", "en": "Screen residuals", "de": "Residuen prüfen" },
+          "text": {
+            "es": "Se marcan los residuos con |rᵢ| > 3σᵢ; comparación con W = I.",
+            "en": "Residuals with |rᵢ| > 3σᵢ are flagged; compared with W = I.",
+            "de": "Residuen mit |rᵢ| > 3σᵢ werden markiert; Vergleich mit W = I."
+          }
+        },
+        {
+          "title": { "es": "Presupuesto GUM", "en": "GUM budget", "de": "GUM-Budget" },
+          "text": {
+            "es": "u²(d) = C₀ + C₁D²; ν_eff por Welch-Satterthwaite; U = k·u(d).",
+            "en": "u²(d) = C₀ + C₁D²; ν_eff by Welch-Satterthwaite; U = k·u(d).",
+            "de": "u²(d) = C₀ + C₁D²; ν_eff nach Welch-Satterthwaite; U = k·u(d)."
+          }
+        }
+      ]
+    },
+    {
+      "type": "figure",
+      "narrow": true,
+      "title": { "es": "Verificación con datos simulados", "en": "Verification with simulated data", "de": "Verifikation mit simulierten Daten" },
+      "src": { "de": "assets/img/edm-chi2-de.png", "en": "assets/img/edm-chi2-en.png" },
+      "alt": {
+        "es": "Densidad χ² con 14 grados de libertad. El estadístico T = 13,40 queda dentro de la región de aceptación, entre 5,629 y 26,119.",
+        "en": "χ² density with 14 degrees of freedom. The statistic T = 13.40 lies inside the acceptance region between 5.629 and 26.119.",
+        "de": "χ²-Dichte mit 14 Freiheitsgraden. Die Teststatistik T = 13,40 liegt im Annahmebereich zwischen 5,629 und 26,119."
+      },
+      "caption": {
+        "es": "Estadístico de prueba χ²(14): T = 13,40, dentro de la región de aceptación de H₀ (5,629 a 26,119). Simulación a partir del modelo estocástico (semilla 20260101); s₀² = 0,957.",
+        "en": "Test statistic χ²(14): T = 13.40, inside the acceptance region of H₀ (5.629 to 26.119). Simulated from the stochastic model (seed 20260101); s₀² = 0.957.",
+        "de": "Teststatistik χ²(14): T = 13,40, im Annahmebereich von H₀ (5,629 bis 26,119). Simulation aus dem stochastischen Modell (Seed 20260101); s₀² = 0,957."
+      },
+      "credit": {
+        "es": "Valores: `js/test-ajuste.js`, ejecutado el 04.11.2026 con Node 24 (math.inv sustituido por Gauss-Jordan).",
+        "en": "Values: `js/test-ajuste.js`, run on 04.11.2026 with Node 24 (math.inv replaced by Gauss-Jordan).",
+        "de": "Werte: `js/test-ajuste.js`, am 04.11.2026 mit Node 24 ausgeführt (math.inv durch Gauß-Jordan ersetzt)."
+      }
+    },
+    {
+      "type": "lists",
+      "items": [
+        {
+          "title": { "es": "Resultados de la verificación", "en": "Verification results", "de": "Ergebnisse der Verifikation" },
+          "items": [
+            {
+              "es": "**Sin ruido.** δ = 3,000000 mm recuperada exactamente, ‖r‖∞ = 8·10⁻¹¹ mm.",
+              "en": "**Noise-free.** δ = 3.000000 mm recovered exactly, ‖r‖∞ = 8·10⁻¹¹ mm.",
+              "de": "**Rauschfrei.** δ = 3,000000 mm exakt zurückgewonnen, ‖r‖∞ = 8·10⁻¹¹ mm."
+            },
+            {
+              "es": "**Con ruido** (a = 3 mm, b = 3 ppm, e_cf = 0,5 mm). ‖AᵀWr‖ = 6,7·10⁻¹¹, sin valores atípicos.",
+              "en": "**Noisy** (a = 3 mm, b = 3 ppm, e_cf = 0.5 mm). ‖AᵀWr‖ = 6.7·10⁻¹¹, no outliers.",
+              "de": "**Verrauscht** (a = 3 mm, b = 3 ppm, e_cf = 0,5 mm). ‖AᵀWr‖ = 6,7·10⁻¹¹, keine Ausreißer."
+            },
+            {
+              "es": "**Constante.** Magnitud de 2,59 ± 1,38 mm frente a 3,0 mm simulados (0,3 s). El signo sale invertido: el simulador y la ecuación de observación aún usan convenciones distintas.",
+              "en": "**Constant.** Magnitude 2.59 ± 1.38 mm against 3.0 mm simulated (0.3 s). The sign is reversed: simulator and observation equation still use different conventions.",
+              "de": "**Konstante.** Betrag 2,59 ± 1,38 mm gegen 3,0 mm simuliert (0,3 s). Das Vorzeichen ist umgekehrt: Simulator und Beobachtungsgleichung nutzen noch verschiedene Konventionen."
+            },
+            {
+              "es": "**Ponderado frente a no ponderado.** δ̂ difiere en 0,024 mm. En la prueba, todas las σᵢ están entre 3,073 y 3,385 mm: en la línea base corta domina el término constante a.",
+              "en": "**Weighted vs. unweighted.** δ̂ differs by 0.024 mm. In the test all σᵢ lie between 3.073 and 3.385 mm: on the short baseline the constant term a dominates.",
+              "de": "**Gewichtet gegen ungewichtet.** δ̂ unterscheidet sich um 0,024 mm. Im Test liegen alle σᵢ zwischen 3,073 und 3,385 mm: Auf der kurzen Basis dominiert der konstante Anteil a."
+            }
+          ]
+        },
+        {
+          "title": { "es": "Límites y puntos abiertos", "en": "Limits and open points", "de": "Grenzen und offene Punkte" },
+          "items": [
+            {
+              "es": "Prototipo académico, no es un procedimiento de calibración acreditado.",
+              "en": "Academic prototype, not an accredited calibration procedure.",
+              "de": "Akademischer Prototyp, kein akkreditiertes Kalibrierverfahren."
+            },
+            {
+              "es": "Valores provisionales: las posiciones de P2 a P6 están interpoladas y los seis tramos nominales son ficticios. Hay que sustituirlos por un levantamiento de la línea base antes de cualquier uso metrológico.",
+              "en": "Placeholders: positions of P2 to P6 are interpolated and the six nominal segments are fictitious. Replace them with a survey of the baseline before any metrological use.",
+              "de": "Platzhalter: Lage von P2 bis P6 interpoliert, die sechs Sollstrecken sind fiktiv. Vor jeder metrologischen Nutzung durch die Vermessung der Basis ersetzen."
+            },
+            {
+              "es": "Documentado abiertamente en el README: u(d) no está en mm en el caso ponderado porque s₀² es adimensional; la prueba χ² no dice nada en el ajuste no ponderado; nivel de confianza del 95 % frente al 95,45 %; Welch-Satterthwaite con contribuciones correlacionadas; el centrado se cuenta dos veces.",
+              "en": "Openly documented in the README: u(d) is not in mm in the weighted case because s₀² is dimensionless; the χ² test on the unweighted fit is meaningless; confidence level 95 % vs. 95.45 %; Welch-Satterthwaite with correlated inputs; centring counted twice.",
+              "de": "Im README offen dokumentiert: u(d) ist im gewichteten Fall nicht in mm, weil s₀² dimensionslos ist; χ²-Test beim ungewichteten Ausgleich ohne Aussage; Vertrauensniveau 95 % gegen 95,45 %; Welch-Satterthwaite mit korrelierten Beiträgen; Zentrierung doppelt gezählt."
+            },
+            {
+              "es": "Pendiente: unificar el signo de δ entre el simulador y el modelo.",
+              "en": "Open: align the sign of δ between simulator and model.",
+              "de": "Offen: Vorzeichen von δ zwischen Simulator und Modell vereinheitlichen."
+            }
+          ]
+        },
+        {
+          "title": { "es": "Aplicable a", "en": "Transferable to", "de": "Übertragbar auf" },
+          "items": [
+            {
+              "es": "**Control de calidad de geodatos oficiales.** Redundancia, prueba global y residuos como criterio de aceptación comprobable.",
+              "en": "**Quality assurance of official geodata.** Redundancy, global test and residuals as a checkable acceptance criterion.",
+              "de": "**Qualitätssicherung amtlicher Geodaten.** Redundanz, Globaltest und Residuen als prüfbares Abnahmekriterium."
+            },
+            {
+              "es": "**Incertidumbre de medida.** Presupuesto según la GUM (JCGM 100:2008) con grados de libertad y factor de cobertura.",
+              "en": "**Measurement uncertainty.** GUM budget (JCGM 100:2008) with degrees of freedom and coverage factor.",
+              "de": "**Messunsicherheit.** Budget nach GUM (JCGM 100:2008) mit Freiheitsgraden und Erweiterungsfaktor."
+            },
+            {
+              "es": "**Verificación de instrumentos.** Procedimiento de campo para distanciómetros conforme a ISO 17123-4.",
+              "en": "**Instrument testing.** Field procedure for distance meters following ISO 17123-4.",
+              "de": "**Instrumentenprüfung.** Feldverfahren für Distanzmesser in Anlehnung an ISO 17123-4."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "credits": {
+    "es": "Fuentes: README, `docs/math-spec.md` y `js/` del repositorio edm-baseline-calibration. Todos los valores numéricos proceden de datos simulados, no de mediciones de campo.",
+    "en": "Sources: README, `docs/math-spec.md` and `js/` of the edm-baseline-calibration repository. All numerical values come from simulated data, not from field measurements.",
+    "de": "Quellen: README, `docs/math-spec.md` und `js/` des Repositorys edm-baseline-calibration. Alle Zahlenwerte stammen aus simulierten Daten, nicht aus Feldmessungen."
+  }
+}

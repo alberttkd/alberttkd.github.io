@@ -1,0 +1,111 @@
+{
+  "baseUrl": "https://alberttkd.github.io/",
+  "languages": ["es", "en", "de"],
+  "defaultLanguage": "en",
+  "updated": "11/2026",
+
+  "person": {
+    "name": "Albert Johan Herrera Sánchez",
+    "email": "albert.geomatics@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/albertgeomatics/",
+    "github": "https://github.com/alberttkd"
+  },
+
+  "profile": {
+    "headline": {
+      "es": "Geomática · Geoinformática · Teledetección · Geodesia",
+      "en": "Geomatics · Geoinformatics · Remote Sensing · Geodesy",
+      "de": "Geomatik · Geoinformatik · Fernerkundung · Geodäsie"
+    },
+    "intro": {
+      "es": "Estudiante de grado en Ingeniería Topográfica y Geomática (Universidad del Quindío, Colombia) y, desde 10/2026, becario DAAD-KOSPIE en la TU Bergakademie Freiberg. Áreas de trabajo: Python y PyQGIS, PostGIS, teledetección y ajuste por mínimos cuadrados.",
+      "en": "Bachelor student in Geomatics & Surveying Engineering (Universidad del Quindío, Colombia), DAAD-KOSPIE scholarship holder at TU Bergakademie Freiberg since 10/2026. Focus: Python and PyQGIS, PostGIS, remote sensing, least-squares adjustment.",
+      "de": "Bachelorstudent Vermessungs- und Geomatik-Ingenieurwesen (Universidad del Quindío, Kolumbien), seit 10/2026 DAAD-KOSPIE-Stipendiat an der TU Bergakademie Freiberg. Schwerpunkte: Python und PyQGIS, PostGIS, Fernerkundung, Ausgleichungsrechnung."
+    },
+    "facts": [
+      {
+        "label": { "es": "Disponible", "en": "Available", "de": "Verfügbar" },
+        "value": {
+          "es": "Abril a julio de 2027, prácticas obligatorias (Pflichtpraktikum)",
+          "en": "April to July 2027, mandatory internship",
+          "de": "April bis Juli 2027, Pflichtpraktikum"
+        }
+      },
+      {
+        "label": { "es": "Programa", "en": "Programme", "de": "Programm" },
+        "value": "DAAD-KOSPIE, TU Bergakademie Freiberg"
+      },
+      {
+        "label": { "es": "Idiomas", "en": "Languages", "de": "Sprachen" },
+        "value": {
+          "es": "Alemán B1 (onSET), inglés B2 (IELTS 6.0), español lengua materna",
+          "en": "German B1 (onSET), English B2 (IELTS 6.0), Spanish native",
+          "de": "Deutsch B1 (onSET), Englisch B2 (IELTS 6.0), Spanisch Muttersprache"
+        }
+      }
+    ]
+  },
+
+  "more": [
+    {
+      "title": { "es": "Río Bugalagrande", "en": "Bugalagrande River basin", "de": "Río Bugalagrande" },
+      "kind": { "es": "Proyecto de investigación GEOIDE G62", "en": "Research project, GEOIDE G62", "de": "Forschungsprojekt GEOIDE G62" },
+      "text": {
+        "es": "Cobertura del suelo multitemporal, escenarios CA-Markov, escorrentía SCS-CN. Presentado en la AmeriGEO Week 2025, Bogotá.",
+        "en": "Multi-temporal land cover, CA-Markov scenarios, SCS-CN runoff. Presented at AmeriGEO Week 2025, Bogotá.",
+        "de": "Multitemporale Landbedeckung, CA-Markov-Szenarien, SCS-CN-Abfluss. Vortrag AmeriGEO Week 2025, Bogotá."
+      }
+    },
+    {
+      "title": { "es": "Mapas geológicos con PyQGIS", "en": "Geological maps with PyQGIS", "de": "Geologische Karten mit PyQGIS" },
+      "kind": { "es": "Proyecto de curso", "en": "Course project", "de": "Studienprojekt" },
+      "text": {
+        "es": "Pipeline en Python para elaborar mapas geológicos según los estándares del Servicio Geológico Colombiano (SGC).",
+        "en": "Python pipeline producing geological maps to the standards of the Servicio Geológico Colombiano (SGC).",
+        "de": "Python-Pipeline für geologische Karten nach den Vorgaben des Servicio Geológico Colombiano (SGC)."
+      }
+    },
+    {
+      "title": { "es": "UltraCam-D Valledupar", "en": "UltraCam-D, Valledupar", "de": "UltraCam-D Valledupar" },
+      "kind": { "es": "Asignatura Fotogrametría Digital", "en": "Digital Photogrammetry module", "de": "Modul Digitale Photogrammetrie" },
+      "text": {
+        "es": "Aerotriangulación y ajuste de haces, modelo digital del terreno y ortofoto, evaluación de la exactitud.",
+        "en": "Aerial triangulation and bundle adjustment, DTM and orthophoto, accuracy assessment.",
+        "de": "Aerotriangulation und Bündelausgleichung, Geländemodell und Orthophoto, Genauigkeitsbewertung."
+      }
+    }
+  ],
+
+  "ui": {
+    "langNames": { "es": "Español", "en": "English", "de": "Deutsch" },
+    "langLabel": { "es": "Idioma", "en": "Language", "de": "Sprache" },
+    "skip": { "es": "Saltar al contenido", "en": "Skip to content", "de": "Zum Inhalt springen" },
+    "overview": { "es": "Vista general de proyectos", "en": "Project overview", "de": "Projektübersicht" },
+    "indexTitle": { "es": "Índice de hojas", "en": "Sheet index", "de": "Blattübersicht" },
+    "indexNote": {
+      "es": "{n} hojas de proyecto. Cada recuadro abre la hoja del proyecto.",
+      "en": "{n} project sheets. Each box opens the project sheet.",
+      "de": "{n} Projektblätter. Jedes Feld öffnet das Projektblatt."
+    },
+    "open": { "es": "Abrir hoja", "en": "Open sheet", "de": "Blatt öffnen" },
+    "moreTitle": { "es": "Otros proyectos, sin hoja propia", "en": "Further projects, no separate sheet", "de": "Weitere Projekte, ohne eigenes Blatt" },
+    "contact": { "es": "Contacto", "en": "Contact", "de": "Kontakt" },
+    "updated": { "es": "Actualizado", "en": "Updated", "de": "Stand" },
+    "back": { "es": "Vista general", "en": "Overview", "de": "Übersicht" },
+    "breadcrumb": { "es": "Ruta de navegación", "en": "Breadcrumb", "de": "Navigationspfad" },
+    "sheet": { "es": "Hoja", "en": "Sheet", "de": "Blatt" },
+    "problem": { "es": "Problema", "en": "Problem", "de": "Problem" },
+    "approach": { "es": "Enfoque", "en": "Approach", "de": "Ansatz" },
+    "result": { "es": "Resultado", "en": "Result", "de": "Ergebnis" },
+    "metaLabel": { "es": "Ficha del proyecto", "en": "Project facts", "de": "Projektdaten" },
+    "repo": { "es": "Repositorio", "en": "Repository", "de": "Repository" },
+    "repoPublic": { "es": "Repositorio público en GitHub", "en": "Public repository on GitHub", "de": "Öffentliches Repository auf GitHub" },
+    "fig": { "es": "Fig.", "en": "Fig.", "de": "Abb." },
+    "figLabelsEn": { "es": "Rótulos de la figura en inglés.", "en": "", "de": "Beschriftung der Abbildung auf Englisch." },
+    "credits": { "es": "Datos y atribuciones", "en": "Data and credits", "de": "Daten und Nachweise" },
+    "pagerLabel": { "es": "Otras hojas", "en": "Other sheets", "de": "Weitere Blätter" },
+    "prev": { "es": "Hoja anterior", "en": "Previous sheet", "de": "Vorheriges Blatt" },
+    "next": { "es": "Hoja siguiente", "en": "Next sheet", "de": "Nächstes Blatt" },
+    "notFound": { "es": "Página no encontrada. Ir a la vista general", "en": "Page not found. Go to the overview", "de": "Seite nicht gefunden. Zur Übersicht" }
+  }
+}

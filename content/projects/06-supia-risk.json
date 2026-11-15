@@ -1,0 +1,355 @@
+{
+  "slug": "supia-risk",
+  "title": { "es": "Riesgo de desastres, Supía", "en": "Geohazards, Supía", "de": "Georisiko Supía" },
+  "kind": { "es": "Proyecto de curso, tres autores", "en": "Course project, three authors", "de": "Studienprojekt, drei Autoren" },
+  "summary": {
+    "es": "Inundación, movimientos en masa y avenidas torrenciales: 54 de 129 manzanas urbanas en la clase más alta (exposición ponderada por amenaza).",
+    "en": "Floods, mass movements, flash floods: 54 of 129 urban blocks in the highest class (hazard-weighted exposure).",
+    "de": "Hochwasser, Massenbewegung, Sturzflut: 54 von 129 Baublöcken in der höchsten Klasse (gefährdungsgewichtete Exposition)."
+  },
+  "stack": "PyQGIS, GeoPandas, GDAL, Matplotlib",
+  "strip": {
+    "img": "assets/img/strip-supia.jpg",
+    "caption": {
+      "es": "Amenaza según el criterio MAX. EPSG:32618",
+      "en": "Composite hazard, MAX criterion. EPSG:32618",
+      "de": "Gefährdung nach MAX-Kriterium. EPSG:32618"
+    }
+  },
+
+  "repo": "https://github.com/alberttkd/analisis-riesgo-desastres-supia-caldas",
+
+  "headline": {
+    "es": "Tres amenazas, una regla: cuenta el nivel más alto.",
+    "en": "Three hazards, one rule: the highest level counts.",
+    "de": "Drei Gefahren, eine Regel: Die höchste Stufe zählt."
+  },
+  "lead": {
+    "es": "Análisis de riesgo de desastres para Supía (Caldas, Colombia). Inundación, movimientos en masa y avenidas torrenciales, combinados por un pipeline de scripts con PyQGIS y GeoPandas en un mapa de amenaza y una clase de riesgo para cada manzana urbana.",
+    "en": "Disaster risk analysis for Supía (Caldas, Colombia). Flooding, mass movements and flash floods, combined by a scripted PyQGIS/GeoPandas pipeline into one hazard map and a risk class for every urban block.",
+    "de": "Katastrophenrisikoanalyse für Supía (Caldas, Kolumbien). Überschwemmung, Massenbewegung und Sturzflut, in einer skriptbasierten PyQGIS/GeoPandas-Pipeline zu einer Gefahrenkarte und einer Risikoklasse je Baublock zusammengeführt."
+  },
+
+  "metric": {
+    "value": "54/129",
+    "label": {
+      "es": "manzanas urbanas en la clase de riesgo Alto: el 41,9 % de las manzanas clasificadas del casco urbano.",
+      "en": "urban blocks in the High risk class: 41.9 % of all classified blocks in the town centre.",
+      "de": "Baublöcke in der Risikoklasse hoch: 41,9 % aller klassifizierten Blöcke im Ortskern."
+    },
+    "note": {
+      "es": "54 Alto, 40 Medio, 35 Bajo. Con vulnerabilidad uniforme, el índice equivale al nivel de amenaza (véanse los límites).",
+      "en": "54 High, 40 Medium, 35 Low. With uniform vulnerability the index equals the hazard level (see limits).",
+      "de": "54 hoch, 40 mittel, 35 gering. Bei einheitlicher Vulnerabilität entspricht der Index der Gefahrenstufe (siehe Grenzen)."
+    }
+  },
+  "facts": [
+    {
+      "value": { "es": "89,1", "en": "89.1", "de": "89,1" },
+      "unit": "%",
+      "label": {
+        "es": "de la red vial (88,0 de 98,7 km) está en una zona de amenaza por movimientos en masa.",
+        "en": "of the road network (88.0 of 98.7 km) lies in a mass-movement hazard zone.",
+        "de": "des Straßennetzes (88,0 von 98,7 km) liegen in einer Gefahrenzone für Massenbewegungen."
+      }
+    },
+    {
+      "value": { "es": "2,3", "en": "2.3", "de": "2,3" },
+      "unit": "km",
+      "label": {
+        "es": "de vías en zonas de inundación (2,3 %).",
+        "en": "of roads in flood zones (2.3 %).",
+        "de": "Straßen in Überschwemmungszonen (2,3 %)."
+      }
+    },
+    {
+      "value": "6",
+      "label": {
+        "es": "scripts de Python, desde las capas originales hasta las clases de riesgo y los mapas.",
+        "en": "Python scripts, from raw layers to risk classes and maps.",
+        "de": "Python-Skripte, von den Rohdaten bis zu Risikoklassen und Karten."
+      }
+    }
+  ],
+
+  "story": {
+    "problem": {
+      "es": "Supía (Caldas, de 800 a 2 200 m s. n. m.) afronta inundaciones en el río Supía, movimientos en masa en las laderas y avenidas torrenciales en los afluentes de fuerte pendiente. Donde las amenazas se superponen, el Decreto 1077/2015 exige una zonificación integrada.",
+      "en": "Supía (Caldas, 800 to 2,200 m a.s.l.) faces floods on the río Supía, mass movements on the slopes and flash floods in steep tributaries. Where hazards overlap, Decreto 1077/2015 requires one integrated zoning.",
+      "de": "Supía (Caldas, 800 bis 2.200 m ü. NN): Überschwemmung am Río Supía, Massenbewegungen an Hängen, Sturzfluten in steilen Zuflüssen. Bei Überlagerung verlangt das Decreto 1077/2015 eine integrierte Zonierung."
+    },
+    "approach": {
+      "es": "Seis scripts de Python: reproyectar todas las capas a EPSG:32618, intersecar las amenazas con vías, equipamientos y manzanas, combinar las tres amenazas por celda con MAX, clasificar un índice de riesgo por manzana y generar los mapas.",
+      "en": "Six Python scripts: reproject all layers to EPSG:32618, intersect hazards with roads, facilities and blocks, combine the three hazards per cell with MAX, classify a risk index per block, render the maps.",
+      "de": "Sechs Python-Skripte: alle Ebenen nach EPSG:32618 transformieren, Gefahren mit Straßen, Einrichtungen und Baublöcken verschneiden, zellweise per MAX kombinieren, je Block einen Risikoindex klassifizieren, Karten erzeugen."
+    },
+    "result": {
+      "es": "54 de 129 manzanas urbanas en riesgo Alto. 88,0 de 98,7 km de vías están en una zona de movimientos en masa y 2,3 km en zonas de inundación. Ningún equipamiento crítico urbano en riesgo Alto; sí una torre de telecomunicaciones rural.",
+      "en": "54 of 129 urban blocks in High risk. 88.0 of 98.7 km of roads lie in a mass-movement zone, 2.3 km in flood zones. No urban critical facility in High risk; one rural telecom tower.",
+      "de": "54 von 129 Baublöcken mit hohem Risiko. 88,0 von 98,7 km Straßen in einer Zone für Massenbewegungen, 2,3 km in Überschwemmungszonen. Im Ortskern keine kritische Einrichtung mit hohem Risiko; ein ländlicher Telekommunikationsturm schon."
+    }
+  },
+
+  "meta": [
+    {
+      "label": { "es": "Equipo", "en": "Team", "de": "Team" },
+      "value": "Albert J. Herrera S., Juan C. Jaramillo R., Sebastián García F."
+    },
+    {
+      "label": { "es": "Aporte de Albert", "en": "Albert’s part", "de": "Alberts Anteil" },
+      "value": {
+        "es": "Construcción de un pipeline de geoprocesamiento con GeoPandas y Matplotlib para derivar mapas de amenaza y de riesgo; producción automatizada de mapas y documentación del método.",
+        "en": "Built a geoprocessing pipeline with GeoPandas and Matplotlib to derive hazard and risk maps; automated map production and documentation of the method.",
+        "de": "Aufbau einer Geoverarbeitungspipeline mit GeoPandas und Matplotlib zur Ableitung von Gefährdungs- und Risikokarten; automatisierte Kartenerstellung und Dokumentation der Methodik."
+      }
+    },
+    {
+      "label": { "es": "Contexto", "en": "Context", "de": "Kontext" },
+      "value": {
+        "es": "Proyecto de curso, asignatura Gestión del Riesgo, Universidad del Quindío, mayo de 2026.",
+        "en": "Course project, module Gestión del Riesgo (disaster risk management), Universidad del Quindío, May 2026.",
+        "de": "Studienprojekt, Fach Gestión del Riesgo (Katastrophenrisikomanagement), Universidad del Quindío, Mai 2026."
+      }
+    },
+    {
+      "label": { "es": "Sistema de referencia", "en": "Reference system", "de": "Bezugssystem" },
+      "value": "WGS 84 / UTM 18N, EPSG:32618"
+    },
+    {
+      "label": { "es": "Licencia", "en": "Licence", "de": "Lizenz" },
+      "value": {
+        "es": "Código del pipeline: MIT. Informe y figuras: trabajo académico de los tres autores.",
+        "en": "Pipeline code: MIT. Report and figures: academic work of the three authors.",
+        "de": "Code der Pipeline: MIT. Bericht und Abbildungen: akademische Arbeit der drei Autoren."
+      }
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "figures",
+      "title": { "es": "Amenaza compuesta y riesgo por manzana", "en": "Composite hazard and risk per block", "de": "Kombinierte Gefährdung und Risiko je Baublock" },
+      "items": [
+        {
+          "src": { "de": "assets/img/supia-hazard-de.jpg", "en": "assets/img/supia-hazard-en.jpg" },
+          "alt": {
+            "es": "Mapa del municipio de Supía con la amenaza compuesta: la mayor parte en nivel Bajo, con franjas de nivel Alto a lo largo de los cauces y en las laderas.",
+            "en": "Map of the municipality of Supía with the composite hazard: mostly Low, with High strips along the channels and on the slopes.",
+            "de": "Karte der Gemeinde Supía mit der kombinierten Gefährdung: überwiegend gering, mit Streifen der Stufe hoch entlang der Gerinne und an den Hängen."
+          },
+          "caption": {
+            "es": "Amenaza compuesta, municipio de Supía. En cada celda, el más alto de los tres niveles de amenaza (criterio MAX, Decreto 1077/2015). Rojo oscuro: Alto; naranja: Medio; amarillo: Bajo. WGS 84 / UTM 18N, EPSG:32618, cuadrícula de 5 km.",
+            "en": "Composite hazard, municipality of Supía. Per cell the highest of the three hazard levels (MAX criterion, Decreto 1077/2015). Dark red: High; orange: Medium; yellow: Low. WGS 84 / UTM 18N, EPSG:32618, grid 5 km.",
+            "de": "Kombinierte Gefährdung, Gemeinde Supía. Je Zelle die höchste der drei Gefahrenstufen (MAX-Kriterium, Decreto 1077/2015). Dunkelrot: hoch; orange: mittel; gelb: gering. WGS 84 / UTM 18N, EPSG:32618, Gitter 5 km."
+          },
+          "credit": {
+            "es": "fig01 del repositorio. Datos: IGAC, SGC, IDEAM, EOT Supía 2020. Red vial: © colaboradores de OpenStreetMap.",
+            "en": "fig01 (repo). Data: IGAC, SGC, IDEAM, EOT Supía 2020. Road network: © OpenStreetMap contributors.",
+            "de": "fig01 (Repo). Daten: IGAC, SGC, IDEAM, EOT Supía 2020. Straßennetz: © OpenStreetMap-Mitwirkende."
+          }
+        },
+        {
+          "src": "assets/img/supia-detail-en.jpg",
+          "alt": {
+            "es": "Detalle del casco urbano de Supía con las manzanas coloreadas por clase de riesgo: Alto, Medio y Bajo.",
+            "en": "Detail of the town centre of Supía with urban blocks coloured by risk class: High, Medium and Low.",
+            "de": "Ausschnitt des Ortskerns von Supía mit den Baublöcken, eingefärbt nach Risikoklasse: hoch, mittel und gering."
+          },
+          "caption": {
+            "es": "Detalle A: clase de riesgo por manzana urbana, con los mismos colores. E 427 446–428 480, N 601 365–603 767 m.",
+            "en": "Detail A: risk class per urban block, same colours. E 427 446–428 480, N 601 365–603 767 m.",
+            "de": "Ausschnitt A: Risikoklasse je Baublock, gleiche Farben. E 427 446–428 480, N 601 365–603 767 m."
+          },
+          "credit": {
+            "es": "fig02 del repositorio. EPSG:32618.",
+            "en": "fig02 (repo). EPSG:32618.",
+            "de": "fig02 (Repo). EPSG:32618."
+          }
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "title": {
+        "es": "Seis scripts: de las capas originales a las clases de riesgo",
+        "en": "Six scripts from raw layers to risk classes",
+        "de": "Sechs Skripte: von Rohdaten zu Risikoklassen"
+      },
+      "intro": {
+        "es": "Insumos: estudio de amenazas de Corpocaldas 2018 (1:5 000 urbano, 1:25 000 rural); manzanas, perímetros, ríos y vías del IGAC; OpenStreetMap 2024 vía QuickOSM. Los scripts 00 a 04 se ejecutan en la consola de Python de QGIS 3.40.2 (PyQGIS, processing, GDAL/OGR); la cartografía, con Python 3.",
+        "en": "Inputs: Corpocaldas hazard study 2018 (1:5,000 urban, 1:25,000 rural); IGAC blocks, perimeters, rivers and roads; OpenStreetMap 2024 via QuickOSM. Scripts 00 to 04 run in the QGIS 3.40.2 Python console (PyQGIS, processing, GDAL/OGR); the cartography runs in Python 3.",
+        "de": "Eingangsdaten: Gefahrenstudie Corpocaldas 2018 (1:5.000 urban, 1:25.000 ländlich); IGAC: Baublöcke, Grenzen, Gewässer, Straßen; OpenStreetMap 2024 über QuickOSM. Die Skripte 00 bis 04 laufen in der Python-Konsole von QGIS 3.40.2 (PyQGIS, processing, GDAL/OGR), die Kartografie mit Python 3."
+      },
+      "items": [
+        {
+          "title": { "es": "Diagnóstico", "en": "Diagnosis", "de": "Diagnose" },
+          "text": {
+            "es": "Inventario de capas, CRS y cobertura. Salida: `diagnostico_*.txt`.",
+            "en": "Inventory of layers, CRS and coverage. Output: `diagnostico_*.txt`.",
+            "de": "Inventar der Ebenen, KBS und Abdeckung. Ausgabe: `diagnostico_*.txt`."
+          }
+        },
+        {
+          "title": { "es": "Normalización de CRS", "en": "CRS normalisation", "de": "KBS-Normalisierung" },
+          "text": {
+            "es": "Reproyectar y reparar capas vectoriales y ráster (`native:reprojectlayer`, `native:fixgeometries`). 27 capas en EPSG:32618.",
+            "en": "Reproject and repair vector and raster layers (`native:reprojectlayer`, `native:fixgeometries`). 27 layers in EPSG:32618.",
+            "de": "Vektor- und Rasterebenen transformieren und reparieren (`native:reprojectlayer`, `native:fixgeometries`). 27 Ebenen in EPSG:32618."
+          }
+        },
+        {
+          "title": { "es": "Superposición espacial", "en": "Spatial overlay", "de": "Verschneidung" },
+          "text": {
+            "es": "Amenaza × vías y equipamientos; longitud por nivel y unión por localización (`gdal:polygonize`, `native:intersection`). Salida: `exposicion_*.csv`.",
+            "en": "Hazard × roads and facilities; length per level, join by location (`gdal:polygonize`, `native:intersection`). Output: `exposicion_*.csv`.",
+            "de": "Gefahr × Straßen und Einrichtungen; Länge je Stufe, Lage-Join (`gdal:polygonize`, `native:intersection`). Ausgabe: `exposicion_*.csv`."
+          }
+        },
+        {
+          "title": { "es": "Zonificación integrada", "en": "Integrated zoning", "de": "Integrierte Zonierung" },
+          "text": {
+            "es": "Tres amenazas en una misma malla: MAX(inundación, movimiento en masa, avenida torrencial), con `gdal:rasterize` y `numpy.maximum`. Salida: `amenaza_compuesta.tif`.",
+            "en": "Three hazards on one grid: MAX(flood, mass movement, flash flood), with `gdal:rasterize` and `numpy.maximum`. Output: `amenaza_compuesta.tif`.",
+            "de": "Drei Gefahren auf einem Raster: MAX(Überschwemmung, Massenbewegung, Sturzflut), mit `gdal:rasterize` und `numpy.maximum`. Ausgabe: `amenaza_compuesta.tif`."
+          }
+        },
+        {
+          "title": { "es": "Índice de riesgo", "en": "Risk index", "de": "Risikoindex" },
+          "text": {
+            "es": "IR = H × V por manzana; Alto desde 2,5 y Medio desde 1,5. V = 1,0 (uniforme). Salida: `riesgo_*.gpkg`.",
+            "en": "IR = H × V per block; High from 2.5, Medium from 1.5. V = 1.0 (uniform). Output: `riesgo_*.gpkg`.",
+            "de": "IR = H × V je Baublock; hoch ab 2,5, mittel ab 1,5. V = 1,0 (einheitlich). Ausgabe: `riesgo_*.gpkg`."
+          }
+        },
+        {
+          "title": { "es": "Producción de mapas", "en": "Map production", "de": "Kartenproduktion" },
+          "text": {
+            "es": "Seis figuras a partir de las capas de riesgo, con GeoPandas y Matplotlib. PNG a 300 dpi y PDF.",
+            "en": "Six figures from the risk layers, with GeoPandas and Matplotlib. PNG 300 dpi and PDF.",
+            "de": "Sechs Abbildungen aus den Risikoebenen, mit GeoPandas und Matplotlib. PNG 300 dpi und PDF."
+          }
+        }
+      ]
+    },
+    {
+      "type": "figure",
+      "title": { "es": "Amenaza por fenómeno", "en": "Hazard by phenomenon", "de": "Gefährdung je Prozess" },
+      "src": "assets/img/supia-panels-en.jpg",
+      "alt": {
+        "es": "Tres mapas pequeños del municipio: inundación en una franja estrecha junto al río; movimiento en masa en todo el territorio; avenida torrencial en los cauces de los afluentes.",
+        "en": "Three small maps of the municipality: flooding in a narrow strip along the river; mass movement over the whole territory; flash flood in the tributary channels.",
+        "de": "Drei kleine Karten der Gemeinde: Überschwemmung in einem schmalen Streifen am Fluss; Massenbewegung im ganzen Gebiet; Sturzflut in den Seitengerinnen."
+      },
+      "caption": {
+        "es": "De izquierda a derecha. **Inundación:** franja aluvial estrecha a lo largo del río Supía. **Movimiento en masa:** todo el territorio, sobre todo en nivel Bajo; cerca del 10 % del área en nivel Alto. **Avenida torrencial:** cauces de afluentes de fuerte pendiente. Rojo oscuro: Alto; naranja: Medio; amarillo: Bajo; azul: red hídrica. Misma extensión, cuadrícula de 5 km.",
+        "en": "Left to right. **Flooding:** narrow alluvial strip along the río Supía. **Mass movement:** whole territory, mostly Low; about 10 % of the area High. **Flash flood:** steep tributary channels. Dark red: High; orange: Medium; yellow: Low; blue: river network. Same extent, grid 5 km.",
+        "de": "Von links nach rechts. **Überschwemmung:** schmaler Auenstreifen am Río Supía. **Massenbewegung:** ganzes Gebiet, meist gering; rund 10 % der Fläche hoch. **Sturzflut:** steile Seitengerinne. Dunkelrot: hoch; orange: mittel; gelb: gering; blau: Gewässernetz. Gleicher Ausschnitt, Gitter 5 km."
+      },
+      "credit": {
+        "es": "fig03 del repositorio. Datos: IGAC, SGC, IDEAM. EPSG:32618.",
+        "en": "fig03 (repo). Data: IGAC, SGC, IDEAM. EPSG:32618.",
+        "de": "fig03 (Repo). Daten: IGAC, SGC, IDEAM. EPSG:32618."
+      }
+    },
+    {
+      "type": "figure",
+      "title": {
+        "es": "Red vial expuesta, km por nivel de amenaza",
+        "en": "Road network exposed, km by hazard level",
+        "de": "Exponiertes Straßennetz, km je Gefahrenstufe"
+      },
+      "src": { "de": "assets/img/supia-roads-de.png", "en": "assets/img/supia-roads-en.png" },
+      "alt": {
+        "es": "Barras horizontales por tipo de vía. Vías locales: 2,2 km en inundación y 70,9 km en movimiento en masa, de una red de 75,2 km. Secundarias: 0,08 km y 10,6 km de 10,6 km. Primarias: 0,05 km y 6,4 km de 12,9 km.",
+        "en": "Horizontal bars by road class. Local roads: 2.2 km flood and 70.9 km mass movement of a 75.2 km network. Secondary: 0.08 km and 10.6 km of 10.6 km. Primary: 0.05 km and 6.4 km of 12.9 km.",
+        "de": "Horizontale Balken je Straßenklasse. Lokalstraßen: 2,2 km Überschwemmung und 70,9 km Massenbewegung bei 75,2 km Netz. Nebenstraßen: 0,08 km und 10,6 km von 10,6 km. Hauptstraßen: 0,05 km und 6,4 km von 12,9 km."
+      },
+      "caption": {
+        "es": "El 89,1 % de la red vial (88,0 de 98,7 km) está en una zona de amenaza por movimientos en masa, 29,3 km de ellos en nivel Medio o Alto. Inundación: 2,3 km (2,3 %). Vías locales (red de 75,2 km): 2,2 km en inundación y 70,9 km en movimiento en masa; secundarias (10,6 km): 0,08 y 10,6 km; primarias (12,9 km): 0,05 y 6,4 km.",
+        "en": "89.1 % of the road network (88.0 of 98.7 km) lies in a mass-movement hazard zone, 29.3 km of it in Medium or High. Flooding: 2.3 km (2.3 %). Local roads (75.2 km network): 2.2 km flood and 70.9 km mass movement; secondary (10.6 km): 0.08 and 10.6 km; primary (12.9 km): 0.05 and 6.4 km.",
+        "de": "89,1 % des Straßennetzes (88,0 von 98,7 km) liegen in einer Gefahrenzone für Massenbewegungen, davon 29,3 km in mittel oder hoch. Überschwemmung: 2,3 km (2,3 %). Lokalstraßen (Netz 75,2 km): 2,2 km Überschwemmung und 70,9 km Massenbewegung; Nebenstraßen (10,6 km): 0,08 und 10,6 km; Hauptstraßen (12,9 km): 0,05 und 6,4 km."
+      },
+      "credit": {
+        "es": "Fuente: `reportes/exposicion_20260527_231247.csv`. Vías: OpenStreetMap 2024, © colaboradores de OpenStreetMap.",
+        "en": "Source: `reportes/exposicion_20260527_231247.csv`. Roads: OpenStreetMap 2024, © OpenStreetMap contributors.",
+        "de": "Quelle: `reportes/exposicion_20260527_231247.csv`. Straßen: OpenStreetMap 2024, © OpenStreetMap-Mitwirkende."
+      }
+    },
+    {
+      "type": "lists",
+      "items": [
+        {
+          "title": { "es": "Marco normativo", "en": "Legal framework", "de": "Rechtsrahmen" },
+          "items": [
+            {
+              "es": "**Ley 1523 de 2012.** Política nacional de gestión del riesgo de desastres de Colombia; el riesgo como función de amenaza, vulnerabilidad y exposición.",
+              "en": "**Ley 1523 de 2012.** Colombia’s national disaster risk management policy; risk as a function of hazard, vulnerability, exposure.",
+              "de": "**Ley 1523 de 2012.** Nationale Politik des Katastrophenrisikomanagements in Kolumbien; Risiko als Funktion von Gefahr, Vulnerabilität, Exposition."
+            },
+            {
+              "es": "**Decreto 1077 de 2015.** Estudios de amenaza para el ordenamiento territorial. Art. 2.2.2.1.3.1.3, parágrafo 3: donde las amenazas se superponen, se aplica el nivel más alto.",
+              "en": "**Decreto 1077 de 2015.** Hazard studies for land-use planning. Art. 2.2.2.1.3.1.3, par. 3: where hazards overlap, the highest level applies.",
+              "de": "**Decreto 1077 de 2015.** Gefahrenstudien für die Raumplanung. Art. 2.2.2.1.3.1.3, Par. 3: Bei überlagerten Gefahren gilt die höchste Stufe."
+            },
+            {
+              "es": "**Marco de Sendai 2015–2030.** Marco de la UNDRR para la reducción del riesgo de desastres.",
+              "en": "**Sendai Framework 2015–2030.** UNDRR framework for disaster risk reduction.",
+              "de": "**Sendai-Rahmenwerk 2015–2030.** Rahmenwerk der UNDRR zur Katastrophenvorsorge."
+            }
+          ]
+        },
+        {
+          "title": { "es": "Límites", "en": "Limits", "de": "Grenzen" },
+          "items": [
+            {
+              "es": "Vulnerabilidad uniforme V = 1,0 (no hay datos de fragilidad de las edificaciones): el índice equivale al nivel de amenaza, así que los resultados muestran exposición ponderada por amenaza, no riesgo diferenciado.",
+              "en": "Uniform vulnerability V = 1.0 (no building fragility data): the index equals the hazard level, so results show hazard-weighted exposure, not differentiated risk.",
+              "de": "Einheitliche Vulnerabilität V = 1,0 (keine Daten zur Bausubstanz): Der Index entspricht der Gefahrenstufe. Ergebnis ist eine gefahrengewichtete Exposition, kein differenziertes Risiko."
+            },
+            {
+              "es": "Los insumos originales (Corpocaldas, IGAC con una ortofoto de unos 35 GB, OSM) no están en el repositorio; una nueva ejecución completa necesita los datos originales.",
+              "en": "Raw inputs (Corpocaldas, IGAC incl. ~35 GB orthophoto, OSM) are not in the repo; a full rerun needs the original data.",
+              "de": "Rohdaten (Corpocaldas, IGAC mit ca. 35 GB Orthophoto, OSM) liegen nicht im Repo; ein vollständiger Neulauf braucht die Originaldaten."
+            },
+            {
+              "es": "El índice de movimientos en masa (1,06 a 7,85) se clasifica en tres intervalos iguales.",
+              "en": "Mass-movement index (1.06 to 7.85) split into three equal intervals.",
+              "de": "Index für Massenbewegungen (1,06 bis 7,85) in drei gleiche Intervalle klassifiziert."
+            }
+          ]
+        },
+        {
+          "title": { "es": "Aplicable a", "en": "Transferable to", "de": "Übertragbar auf" },
+          "items": [
+            {
+              "es": "**Procesamiento automatizado de geodatos.** Cadenas con PyQGIS y GeoPandas en lugar de pasos manuales.",
+              "en": "**Automated geodata processing.** PyQGIS and GeoPandas chains instead of manual steps.",
+              "de": "**Automatisierte Geodatenverarbeitung.** PyQGIS- und GeoPandas-Ketten statt Handarbeit."
+            },
+            {
+              "es": "**Normalización de CRS.** Un CRS de destino por proyecto (aquí EPSG:32618).",
+              "en": "**CRS normalisation.** One target CRS per project (here EPSG:32618).",
+              "de": "**KBS-Normalisierung.** Ein Ziel-KBS je Projekt (hier EPSG:32618)."
+            },
+            {
+              "es": "**Superposición.** Intersección y unión por localización, longitudes por clase.",
+              "en": "**Overlay.** Intersection and join by location, lengths per class.",
+              "de": "**Verschneidung.** Intersection und Lage-Join, Längen je Klasse."
+            },
+            {
+              "es": "**Producción automatizada de mapas.** Figuras regeneradas a partir de los datos mediante scripts.",
+              "en": "**Automated map production.** Figures rebuilt from the data by script.",
+              "de": "**Automatisierte Kartenproduktion.** Abbildungen per Skript aus den Daten."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "credits": {
+    "es": "Autores del informe y de las figuras: Albert J. Herrera S., Juan C. Jaramillo R. y Sebastián García F., asignatura Gestión del Riesgo, Universidad del Quindío. Datos de terceros: estudio de amenazas de Corpocaldas (2018), IGAC, SGC, IDEAM, EOT Supía 2020 y OpenStreetMap (© colaboradores de OpenStreetMap, 2024, vía QuickOSM); conservan la licencia de su fuente original.",
+    "en": "Authors of the report and figures: Albert J. Herrera S., Juan C. Jaramillo R. and Sebastián García F., module Gestión del Riesgo, Universidad del Quindío. Third-party data: Corpocaldas hazard study (2018), IGAC, SGC, IDEAM, EOT Supía 2020 and OpenStreetMap (© OpenStreetMap contributors, 2024, via QuickOSM); they keep the licence of their original source.",
+    "de": "Autoren des Berichts und der Abbildungen: Albert J. Herrera S., Juan C. Jaramillo R. und Sebastián García F., Fach Gestión del Riesgo, Universidad del Quindío. Daten Dritter: Gefahrenstudie Corpocaldas (2018), IGAC, SGC, IDEAM, EOT Supía 2020 und OpenStreetMap (© OpenStreetMap-Mitwirkende, 2024, über QuickOSM); sie behalten die Lizenz ihrer Originalquelle."
+  }
+}

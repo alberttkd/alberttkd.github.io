@@ -1,0 +1,342 @@
+{
+  "slug": "guaviare-forest-loss",
+  "title": { "es": "Pérdida de bosque, Guaviare", "en": "Forest loss, Guaviare", "de": "Waldverlust Guaviare" },
+  "kind": { "es": "Proyecto de curso", "en": "Course project", "de": "Studienprojekt" },
+  "summary": {
+    "es": "Pérdida bruta de bosque de 2015 a 2025: 278 351 ha, cerca del 5,0 % del departamento. Límites del método documentados abiertamente.",
+    "en": "Gross forest loss 2015 to 2025: 278 351 ha, about 5.0 % of the department. Method limitations documented openly.",
+    "de": "Bruttowaldverlust 2015 bis 2025: 278 351 ha, rund 5,0 % des Departamento. Grenzen der Methode offen dokumentiert."
+  },
+  "stack": "Earth Engine (JS), Python, GeoPandas",
+  "strip": {
+    "img": "assets/img/strip-guaviare.jpg",
+    "caption": {
+      "es": "Hansen/UMD GFC v1.13, año de pérdida. EPSG:3116",
+      "en": "Hansen/UMD GFC v1.13, loss year. EPSG:3116",
+      "de": "Hansen/UMD GFC v1.13, Verlustjahr. EPSG:3116"
+    }
+  },
+
+  "repo": "https://github.com/alberttkd/guaviare-forest-loss-2015-2025",
+
+  "headline": {
+    "es": "Pérdida de bosque y áreas protegidas en Guaviare, 2015–2025",
+    "en": "Forest loss and protected areas in Guaviare, 2015–2025",
+    "de": "Waldverlust und Schutzgebiete im Guaviare, 2015–2025"
+  },
+  "lead": {
+    "es": "Una cadena reproducible con Google Earth Engine y Python mide la pérdida bruta de bosque en la Amazonia colombiana. Después de la entrega, una revisión propia pone a prueba sus conclusiones.",
+    "en": "A reproducible Google Earth Engine and Python chain measures gross forest loss in the Colombian Amazon. A post-submission review then tests its own conclusions.",
+    "de": "Eine reproduzierbare Kette aus Google Earth Engine und Python misst den Brutto-Waldverlust im kolumbianischen Amazonasgebiet. Eine eigene Revision prüft danach die Schlüsse."
+  },
+
+  "metric": {
+    "value": "278 351",
+    "unit": "ha",
+    "label": {
+      "es": "de pérdida bruta de bosque en 2015–2025, cerca del 5,0 % de la superficie del departamento.",
+      "en": "gross forest loss 2015–2025, about 5.0 % of the department’s area.",
+      "de": "Brutto-Waldverlust 2015–2025, rund 5,0 % der Fläche des Departements."
+    }
+  },
+  "facts": [
+    {
+      "value": "44 208",
+      "unit": "ha",
+      "label": { "es": "en el año máximo, 2018.", "en": "in the peak year 2018.", "de": "im Spitzenjahr 2018." }
+    },
+    {
+      "value": { "es": "4,5", "en": "4.5", "de": "4,5" },
+      "unit": "%",
+      "label": {
+        "es": "de la pérdida ocurre dentro de áreas protegidas (UICN Ia/Ib/II). No es una medida de eficacia: véase el hallazgo O-5.",
+        "en": "of the loss inside protected areas (IUCN Ia/Ib/II). Not an effectiveness measure: see finding O-5.",
+        "de": "des Verlusts in Schutzgebieten (IUCN Ia/Ib/II). Kein Wirksamkeitsmaß: siehe Befund O-5."
+      }
+    },
+    {
+      "value": "8",
+      "label": {
+        "es": "hallazgos documentados en la revisión posterior a la entrega, cada uno con su corrección.",
+        "en": "documented findings in the post-submission review, each with a correction.",
+        "de": "dokumentierte Befunde in der Revision nach der Abgabe, je mit Korrektur."
+      }
+    }
+  ],
+
+  "story": {
+    "problem": {
+      "es": "Guaviare está en la Amazonia colombiana. La pregunta: ¿cuánto bosque se perdió en 2015–2025, dónde exactamente, y cómo se comparan las áreas protegidas con su entorno?",
+      "en": "Guaviare lies in the Colombian Amazon. The question: how much forest was lost in 2015–2025, where exactly, and how do protected areas and their surroundings compare?",
+      "de": "Der Guaviare liegt im kolumbianischen Amazonasgebiet. Frage: Wie viel Wald ging 2015–2025 verloren, wo genau, und wie schneiden Schutzgebiete und ihr Umfeld ab?"
+    },
+    "approach": {
+      "es": "Enmascarar Hansen GFC v1.13 (30 m) en Google Earth Engine y sumar el área de pérdida por municipio, área protegida y zona de amortiguamiento. Convertir las exportaciones en mapas y en un informe PDF con Python.",
+      "en": "Mask Hansen GFC v1.13 (30 m) in Google Earth Engine and sum loss area per municipality, protected area and buffer zone. Turn the exports into maps and a PDF report in Python.",
+      "de": "Hansen GFC v1.13 (30 m) in Google Earth Engine maskieren, Verlustfläche je Gemeinde, Schutzgebiet und Pufferzone summieren. Die Exporte in Python zu Karten und PDF-Bericht verarbeiten."
+    },
+    "result": {
+      "es": "278 351 ha de pérdida bruta, máximo en 2018 y descenso después de 2022; la mayor parte en San José del Guaviare y El Retorno. Después: una revisión con ocho hallazgos documentados.",
+      "en": "278 351 ha of gross loss, peak in 2018, decline after 2022; most of it in San José del Guaviare and El Retorno. Then: a review with eight documented findings.",
+      "de": "278 351 ha Bruttoverlust, Spitze 2018, Rückgang nach 2022; der größte Teil in San José del Guaviare und El Retorno. Danach: Revision mit acht dokumentierten Befunden."
+    }
+  },
+
+  "meta": [
+    {
+      "label": { "es": "Contexto", "en": "Context", "de": "Kontext" },
+      "value": {
+        "es": "Proyecto de curso, asignatura Programación para SIG, Universidad del Quindío, 2026-1.",
+        "en": "Course project, module Programación para SIG (GIS programming), Universidad del Quindío, 2026-1.",
+        "de": "Studienprojekt, Fach Programación para SIG (GIS-Programmierung), Universidad del Quindío, 2026-1."
+      }
+    },
+    {
+      "label": { "es": "Herramientas", "en": "Tools", "de": "Werkzeuge" },
+      "value": "Google Earth Engine (JavaScript); Python 3.11: pandas, geopandas, rasterio, matplotlib, ReportLab"
+    },
+    {
+      "label": { "es": "Datos", "en": "Data", "de": "Daten" },
+      "value": "Hansen GFC v1.13, WDPA, FAO GAUL 2015"
+    },
+    {
+      "label": { "es": "Licencias", "en": "Licences", "de": "Lizenzen" },
+      "value": {
+        "es": "Código: MIT. Exportaciones de GEE, informe y revisión: CC BY 4.0.",
+        "en": "Code: MIT. GEE exports, report and review: CC BY 4.0.",
+        "de": "Code: MIT. GEE-Exporte, Bericht und Revision: CC BY 4.0."
+      }
+    },
+    {
+      "label": { "es": "Área de estudio", "en": "Study area", "de": "Untersuchungsgebiet" },
+      "value": {
+        "es": "Guaviare, Colombia. 0°38′–2°53′ N / 70°00′–73°40′ W. CRS de cálculo: EPSG:3116.",
+        "en": "Guaviare, Colombia. 0°38′–2°53′ N / 70°00′–73°40′ W. Computation CRS: EPSG:3116.",
+        "de": "Guaviare, Kolumbien. 0°38′–2°53′ N / 70°00′–73°40′ W. Rechen-CRS: EPSG:3116."
+      }
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "figure",
+      "full": true,
+      "title": { "es": "Dónde se perdió el bosque", "en": "Where the forest was lost", "de": "Wo der Wald verloren ging" },
+      "src": { "de": "assets/img/guaviare-map-de.jpg", "en": "assets/img/guaviare-map-en.jpg" },
+      "alt": {
+        "es": "Mapa del departamento de Guaviare con sus cuatro municipios. La pérdida de bosque, en rojo, se concentra en el noroeste, sobre todo en San José del Guaviare y El Retorno; las áreas protegidas aparecen rayadas.",
+        "en": "Map of the department of Guaviare with its four municipalities. Forest loss, in red, concentrates in the north-west, mainly in San José del Guaviare and El Retorno; protected areas are hatched.",
+        "de": "Karte des Departements Guaviare mit seinen vier Gemeinden. Der Waldverlust, in Rot, konzentriert sich im Nordwesten, vor allem in San José del Guaviare und El Retorno; Schutzgebiete sind schraffiert."
+      },
+      "caption": {
+        "es": "Rojo: pérdida de bosque 2015–2025 (proporción por celda de 180 m). Verde: bosque en 2000 (`treecover2000` ≥ 30 %). Rayado: áreas protegidas (WDPA, UICN Ia/Ib/II). Líneas: departamento y municipios (FAO GAUL 2015). Agregado a 180 m para la representación (6 × 6 píxeles); todas las estadísticas usan 30 m. Proyección EPSG:3116, el CRS de cálculo original (véase el hallazgo O-1).",
+        "en": "Red: forest loss 2015–2025 (share per 180 m cell). Green: forest in 2000 (`treecover2000` ≥ 30 %). Hatched: protected areas (WDPA, IUCN Ia/Ib/II). Lines: department and municipalities (FAO GAUL 2015). Aggregated to 180 m for display (6 × 6 pixels); all statistics use 30 m. Projection EPSG:3116, the original computation CRS (see finding O-1).",
+        "de": "Rot: Waldverlust 2015–2025 (Anteil je 180-m-Zelle). Grün: Wald 2000 (`treecover2000` ≥ 30 %). Schraffiert: Schutzgebiete (WDPA, IUCN Ia/Ib/II). Linien: Departement und Gemeinden (FAO GAUL 2015). Für die Darstellung auf 180 m aggregiert (6 × 6 Pixel), gerechnet wird mit 30 m. Projektion EPSG:3116, das Rechen-CRS des Originals (siehe Befund O-1)."
+      },
+      "credit": {
+        "es": "Datos: Hansen/UMD GFC v1.13, `lossyear` 15–25. Mapa redibujado a partir de las exportaciones del repositorio.",
+        "en": "Data: Hansen/UMD GFC v1.13, `lossyear` 15–25. Map redrawn from the repository exports.",
+        "de": "Daten: Hansen/UMD GFC v1.13, `lossyear` 15–25. Karte aus den Exporten des Repositorys neu gezeichnet."
+      }
+    },
+    {
+      "type": "steps",
+      "title": { "es": "Cadena de procesamiento", "en": "Processing chain", "de": "Verarbeitungskette" },
+      "intro": {
+        "es": "Datos de entrada: Hansen GFC v1.13 (30 m, `lossyear`, `treecover2000`), WDPA (UICN Ia/Ib/II, Designated) y FAO GAUL 2015 (niveles 1 y 2). El script `analisis_guaviare_gee.js` trabaja en bloques y usa `crs: EPSG:3116` en todas las reducciones.",
+        "en": "Input data: Hansen GFC v1.13 (30 m, `lossyear`, `treecover2000`), WDPA (IUCN Ia/Ib/II, Designated) and FAO GAUL 2015 (levels 1 and 2). The script `analisis_guaviare_gee.js` works in blocks and uses `crs: EPSG:3116` in every reduction.",
+        "de": "Eingangsdaten: Hansen GFC v1.13 (30 m, `lossyear`, `treecover2000`), WDPA (IUCN Ia/Ib/II, Designated) und FAO GAUL 2015 (Level 1 und 2). Das Skript `analisis_guaviare_gee.js` arbeitet in Blöcken und nutzt `crs: EPSG:3116` in allen Reduktionen."
+      },
+      "items": [
+        {
+          "title": { "es": "Máscara", "en": "Mask", "de": "Maskieren" },
+          "text": { "es": "`treecover2000` ≥ 30 y `lossyear` 15–25.", "en": "`treecover2000` ≥ 30 and `lossyear` 15–25.", "de": "`treecover2000` ≥ 30 und `lossyear` 15–25." }
+        },
+        {
+          "title": { "es": "Área", "en": "Area", "de": "Fläche" },
+          "text": { "es": "`pixelArea()` en hectáreas, escala de 30 m.", "en": "`pixelArea()` in hectares, scale 30 m.", "de": "`pixelArea()` in Hektar, Maßstab 30 m." }
+        },
+        {
+          "title": { "es": "Zonas", "en": "Zones", "de": "Zonen" },
+          "text": { "es": "`reduceRegions` por municipios y áreas protegidas (hallazgo O-2).", "en": "`reduceRegions` over municipalities and protected areas (finding O-2).", "de": "`reduceRegions` über Gemeinden und Schutzgebiete (Befund O-2)." }
+        },
+        {
+          "title": { "es": "Zonas de amortiguamiento", "en": "Buffers", "de": "Puffer" },
+          "text": { "es": "0–5 km y 5–10 km alrededor de las áreas protegidas (hallazgo O-4).", "en": "0–5 km and 5–10 km around protected areas (finding O-4).", "de": "0–5 km und 5–10 km um Schutzgebiete (Befund O-4)." }
+        },
+        {
+          "title": { "es": "Patrón espacial", "en": "Pattern", "de": "Muster" },
+          "text": { "es": "Malla de 5 km, puntuación z por celda (hallazgo O-3).", "en": "5 km grid, z-score per cell (finding O-3).", "de": "5-km-Raster, z-Wert je Zelle (Befund O-3)." }
+        },
+        {
+          "title": { "es": "Exportación y Python", "en": "Export and Python", "de": "Export und Python" },
+          "text": {
+            "es": "4 CSV, 3 shapefiles y 3 GeoTIFF vía Google Drive. `postprocesamiento.py` genera 5 figuras con matplotlib y el informe PDF con ReportLab.",
+            "en": "4 CSV, 3 shapefiles and 3 GeoTIFF via Google Drive. `postprocesamiento.py` produces 5 figures with matplotlib and the PDF report with ReportLab.",
+            "de": "4 CSV, 3 Shapefiles und 3 GeoTIFF über Google Drive. `postprocesamiento.py` erzeugt 5 Abbildungen mit matplotlib und den PDF-Bericht mit ReportLab."
+          }
+        }
+      ]
+    },
+    {
+      "type": "figures",
+      "items": [
+        {
+          "src": { "de": "assets/img/guaviare-annual-de.png", "en": "assets/img/guaviare-annual-en.png" },
+          "alt": {
+            "es": "Gráfico de barras de la pérdida anual de 2015 a 2025: 8 969 ha en 2015, máximo de 44 208 ha en 2018, 33 760 ha en 2020 y 17 101 ha en 2025.",
+            "en": "Bar chart of annual loss 2015 to 2025: 8 969 ha in 2015, peak of 44 208 ha in 2018, 33 760 ha in 2020 and 17 101 ha in 2025.",
+            "de": "Balkendiagramm des jährlichen Verlusts 2015 bis 2025: 8 969 ha im Jahr 2015, Spitze von 44 208 ha im Jahr 2018, 33 760 ha im Jahr 2020 und 17 101 ha im Jahr 2025."
+          },
+          "caption": {
+            "es": "Pérdida bruta anual de bosque, en ha por año, Hansen GFC v1.13, 2015–2025. Máximo en 2018 (44 208 ha), descenso después de 2022.",
+            "en": "Annual gross forest loss, ha per year, Hansen GFC v1.13, 2015–2025. Peak in 2018 (44 208 ha), decline after 2022.",
+            "de": "Jährlicher Brutto-Waldverlust, ha je Jahr, Hansen GFC v1.13, 2015–2025. Spitze 2018 (44 208 ha), Rückgang nach 2022."
+          }
+        },
+        {
+          "src": { "de": "assets/img/guaviare-buffers-de.png", "en": "assets/img/guaviare-buffers-en.png" },
+          "alt": {
+            "es": "Gráfico de barras: tasa de pérdida del 8,43 % en la zona de 0 a 5 km y del 10,64 % en el anillo de 5 a 10 km; la tasa dentro de las áreas protegidas se marca como no comparable.",
+            "en": "Bar chart: loss rate of 8.43 % in the 0 to 5 km buffer and 10.64 % in the 5 to 10 km ring; the rate inside protected areas is marked as not comparable.",
+            "de": "Balkendiagramm: Verlustrate von 8,43 % im Puffer 0 bis 5 km und 10,64 % im Ring 5 bis 10 km; die Rate im Schutzgebiet ist als nicht vergleichbar markiert."
+          },
+          "caption": {
+            "es": "Áreas protegidas y entorno: pérdida en % del área de cada zona. La tasa sube con la distancia, del 8,43 % (0–5 km) al 10,64 % (5–10 km) (O-4). La tasa dentro de las áreas protegidas no es comparable (O-2).",
+            "en": "Protected areas and surroundings: loss as % of zone area. The rate rises with distance, from 8.43 % (0–5 km) to 10.64 % (5–10 km) (O-4). The rate inside protected areas is not comparable (O-2).",
+            "de": "Schutzgebiete und Umfeld: Verlust in % der Zonenfläche. Die Rate steigt mit dem Abstand, von 8,43 % (0–5 km) auf 10,64 % (5–10 km) (O-4). Die Rate im Schutzgebiet ist nicht vergleichbar (O-2)."
+          }
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": { "es": "Pérdida por municipio", "en": "Loss by municipality", "de": "Verlust nach Gemeinde" },
+      "head": [
+        { "es": "Municipio", "en": "Municipality", "de": "Gemeinde" },
+        { "es": "Pérdida (ha)", "en": "Loss (ha)", "de": "Verlust (ha)" },
+        { "es": "% del municipio", "en": "% of municipality", "de": "% der Gemeinde" }
+      ],
+      "rows": [
+        ["San José del Guaviare", "168 747", { "es": "6,94", "en": "6.94", "de": "6,94" }],
+        ["El Retorno", "62 473", { "es": "7,12", "en": "7.12", "de": "7,12" }],
+        ["Calamar", "28 379", { "es": "2,46", "en": "2.46", "de": "2,46" }],
+        ["Miraflores", "18 751", { "es": "1,67", "en": "1.67", "de": "1,67" }]
+      ],
+      "note": {
+        "es": "Dentro de áreas protegidas: 12 423 ha (4,5 % de la pérdida total): Chiribiquete 6 573, Nukak 5 786, Macarena 63 ha.",
+        "en": "Inside protected areas: 12 423 ha (4.5 % of total loss): Chiribiquete 6 573, Nukak 5 786, Macarena 63 ha.",
+        "de": "In Schutzgebieten: 12 423 ha (4,5 % des Gesamtverlusts): Chiribiquete 6 573, Nukak 5 786, Macarena 63 ha."
+      }
+    },
+    {
+      "type": "steps",
+      "title": {
+        "es": "Revisión posterior a la entrega",
+        "en": "Post-submission review",
+        "de": "Selbstkritische Revision nach der Abgabe"
+      },
+      "intro": {
+        "es": "Ocho hallazgos (O), cada uno con su corrección (C), documentados en `docs/revision_metodologica.md`. Las cifras se mantienen tal como se publicaron; lo que cambia es cómo se pueden interpretar. Aquí, los seis principales.",
+        "en": "Eight findings (O), each with a correction (C), documented in `docs/revision_metodologica.md`. The numbers stay as published; what changes is how they may be read. Shown here: the six main ones.",
+        "de": "Acht Befunde (O), je mit Korrektur (C), dokumentiert in `docs/revision_metodologica.md`. Die Zahlen bleiben unverändert; korrigiert wird ihre Lesart. Hier die sechs wichtigsten."
+      },
+      "items": [
+        {
+          "title": { "es": "O-2 · Alto · Áreas de referencia mezcladas", "en": "O-2 · High · Mixed reference areas", "de": "O-2 · Hoch · Gemischte Bezugsflächen" },
+          "text": {
+            "es": "La pérdida se cuenta solo en Guaviare, pero el área es la del polígono WDPA completo (Chiribiquete: 4 285 307 ha). Las tasas por área protegida quedan sesgadas a la baja. **C-2:** intersecar cada área protegida con el área de estudio.",
+            "en": "Loss counted in Guaviare only, area from the full WDPA polygon (Chiribiquete 4 285 307 ha). Per-PA rates are biased low. **C-2:** intersect each protected area with the AOI.",
+            "de": "Verlust nur im Guaviare, Fläche aber vom ganzen WDPA-Polygon (Chiribiquete 4 285 307 ha). Raten je Schutzgebiet sind zu niedrig. **C-2:** Schutzgebiet mit AOI verschneiden."
+          }
+        },
+        {
+          "title": { "es": "O-3 · Alto · No es Getis-Ord Gi*", "en": "O-3 · High · Not Getis-Ord Gi*", "de": "O-3 · Hoch · Kein Getis-Ord Gi*" },
+          "text": {
+            "es": "Lo implementado es una puntuación z global sin matriz de pesos espaciales. Mide la magnitud por celda, no la agrupación. **C-3:** cambiar el nombre o calcular Gi* con pesos Queen y FDR.",
+            "en": "What runs is a global z-score without spatial weights. It measures magnitude per cell, not clustering. **C-3:** rename, or Gi* with Queen weights and FDR.",
+            "de": "Umgesetzt ist ein globaler z-Wert ohne Gewichtsmatrix. Er misst die Größe je Zelle, nicht die Clusterung. **C-3:** umbenennen oder Gi* mit Queen-Gewichten und FDR."
+          }
+        },
+        {
+          "title": { "es": "O-5 · Alto · Eficacia no identificada", "en": "O-5 · High · Effectiveness not identified", "de": "O-5 · Hoch · Wirksamkeit nicht belegt" },
+          "text": {
+            "es": "Una proporción del 4,5 % no mide la eficacia: las áreas protegidas suelen estar en terrenos remotos y con poca presión. **C-5:** tasa por ha de bosque de 2014 y un contrafactual.",
+            "en": "A 4.5 % share is no effectiveness measure: protected areas tend to sit in remote, low-pressure terrain. **C-5:** rate per ha of 2014 forest, counterfactual.",
+            "de": "4,5 % Anteil ist kein Wirksamkeitsmaß: Schutzgebiete liegen oft abgelegen, mit wenig Nutzungsdruck. **C-5:** Rate je ha Wald 2014, Kontrafaktual."
+          }
+        },
+        {
+          "title": { "es": "O-4 · Medio-alto · La lectura de fuga contradice los datos", "en": "O-4 · Medium-high · Leakage reading contradicts the data", "de": "O-4 · Mittel-hoch · Leakage-Schluss widerspricht den Daten" },
+          "text": {
+            "es": "La tasa sube del 8,43 % (0–5 km) al 10,64 % (5–10 km). La accesibilidad lo explica mejor. **C-4:** solo describir; controlar por vías y poblados.",
+            "en": "The rate rises from 8.43 % (0–5 km) to 10.64 % (5–10 km). Accessibility explains this better. **C-4:** describe only; control for roads and towns.",
+            "de": "Die Rate steigt von 8,43 % (0–5 km) auf 10,64 % (5–10 km). Erreichbarkeit erklärt das besser. **C-4:** nur beschreiben; Straßen und Orte kontrollieren."
+          }
+        },
+        {
+          "title": { "es": "O-1 · Medio · CRS mal nombrado", "en": "O-1 · Medium · CRS mislabelled", "de": "O-1 · Mittel · CRS falsch benannt" },
+          "text": {
+            "es": "EPSG:3116 se rotuló como «CTM12» (que es EPSG:9377). El borde este queda a unos 520 km del meridiano central: distorsión teórica de área de aproximadamente +0,67 %. **C-1:** EPSG:9377 y una sola definición de área.",
+            "en": "EPSG:3116 was labelled “CTM12” (that is EPSG:9377). East edge about 520 km off its central meridian: theoretical area distortion about +0.67 %. **C-1:** EPSG:9377, one area definition.",
+            "de": "EPSG:3116 hieß „CTM12“ (das ist EPSG:9377). Der Ostrand liegt rund 520 km vom Mittelmeridian: theoretische Flächenverzerrung ca. +0,67 %. **C-1:** EPSG:9377, eine Flächendefinition."
+          }
+        },
+        {
+          "title": { "es": "O-7 · Medio · Sin incertidumbre", "en": "O-7 · Medium · No uncertainty", "de": "O-7 · Mittel · Keine Unsicherheit" },
+          "text": {
+            "es": "Todas las áreas son valores puntuales, aunque Hansen GFC tiene errores de omisión y de comisión documentados. **C-7:** áreas ajustadas por error (Olofsson 2014).",
+            "en": "All areas are point values, although Hansen GFC has documented omission and commission errors. **C-7:** error-adjusted areas (Olofsson 2014).",
+            "de": "Alle Flächen sind Punktwerte, obwohl Hansen GFC dokumentierte Auslassungs- und Zuordnungsfehler hat. **C-7:** fehlerbereinigte Flächen (Olofsson 2014)."
+          }
+        }
+      ]
+    },
+    {
+      "type": "lists",
+      "items": [
+        {
+          "title": { "es": "Decisiones y correcciones", "en": "Choices and fixes", "de": "Entscheidungen und Korrekturen" },
+          "items": [
+            {
+              "es": "**Decisión deliberada.** Pérdida bruta sin ganancia, porque la capa «gain» de Hansen solo cubre 2000–2012 y no es conmensurable (O-6).",
+              "en": "**Deliberate choice.** Gross loss without gain, because Hansen “gain” covers only 2000–2012 and is not commensurate (O-6).",
+              "de": "**Bewusst so entschieden.** Bruttoverlust ohne Zugewinn, weil Hansen „gain“ nur 2000–2012 abdeckt und nicht kommensurabel ist (O-6)."
+            },
+            {
+              "es": "**Ya corregido.** Rutas relativas, `requirements.txt` y licencia (O-8).",
+              "en": "**Already fixed.** Relative paths, `requirements.txt`, licence (O-8).",
+              "de": "**Bereits behoben.** Relative Pfade, `requirements.txt`, Lizenz (O-8)."
+            }
+          ]
+        },
+        {
+          "title": { "es": "Aplicable a", "en": "Transferable to", "de": "Übertragbar auf" },
+          "items": [
+            {
+              "es": "**Detección de cambios.** Cambio por píxel a partir de una serie temporal, enmascarado y resumido por zonas: el patrón que hay detrás de los indicios de cambio para actualizar datos de base.",
+              "en": "**Change detection.** Per-pixel change from a time series, masked and summarised by zone: the pattern behind change hints for updating base data.",
+              "de": "**Veränderungserkennung.** Änderung je Pixel aus einer Zeitreihe, maskiert und zonal ausgewertet: das Muster für Änderungshinweise in der Fortführung von Geobasisdaten."
+            },
+            {
+              "es": "**Estadísticas de área.** Superposición ráster-vector con un área de referencia clara y un CRS métrico adecuado.",
+              "en": "**Area statistics.** Raster-vector overlay with a clear reference area and a fitting metric CRS.",
+              "de": "**Flächenstatistik.** Raster-Vektor-Verschnitt mit klarer Bezugsfläche und passendem metrischem CRS."
+            },
+            {
+              "es": "**Cadenas reproducibles con GEE y Python.** Script por bloques, exportaciones versionadas, rutas relativas, `requirements.txt`.",
+              "en": "**Reproducible GEE/Python chains.** Script in blocks, versioned exports, relative paths, `requirements.txt`.",
+              "de": "**Reproduzierbare Ketten in GEE/Python.** Skript in Blöcken, versionierte Exporte, relative Pfade, `requirements.txt`."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "credits": {
+    "es": "Datos: Hansen, M. C. et al. (2013), Science 342, 850–853; Global Forest Change v1.13, Hansen/UMD/Google/USGS/NASA. UNEP-WCMC y UICN: WDPA, vía Earth Engine. FAO GAUL 2015. Cifras de las exportaciones CSV del repositorio (ejecución original); mapa y gráficos redibujados.",
+    "en": "Data: Hansen, M. C. et al. (2013), Science 342, 850–853; Global Forest Change v1.13, Hansen/UMD/Google/USGS/NASA. UNEP-WCMC & IUCN: WDPA, via Earth Engine. FAO GAUL 2015. Numbers from the repository CSV exports (original run); map and charts redrawn.",
+    "de": "Daten: Hansen, M. C. et al. (2013), Science 342, 850–853; Global Forest Change v1.13, Hansen/UMD/Google/USGS/NASA. UNEP-WCMC & IUCN: WDPA, über Earth Engine. FAO GAUL 2015. Zahlen aus den CSV-Exporten des Repositorys (Originallauf); Karte und Diagramme neu gezeichnet."
+  }
+}

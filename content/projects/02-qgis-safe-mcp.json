@@ -1,0 +1,302 @@
+{
+  "slug": "qgis-safe-mcp",
+  "title": "QGIS Safe MCP",
+  "kind": { "es": "Proyecto propio de código abierto", "en": "Personal open-source project", "de": "Eigenes Open-Source-Projekt" },
+  "summary": {
+    "es": "Los asistentes de IA manejan QGIS solo a través de una lista cerrada de acciones validadas: en local, con token de sesión y sin ejecución de código.",
+    "en": "AI assistants operate QGIS only through a closed list of validated actions: local, session token, no code execution.",
+    "de": "KI-Assistenten bedienen QGIS nur über eine Whitelist geprüfter Aktionen: lokal, mit Sitzungstoken, ohne Codeausführung."
+  },
+  "stack": { "es": "Python, PyQGIS, QGIS 3.36+ y 4.x", "en": "Python, PyQGIS, QGIS 3.36+ and 4.x", "de": "Python, PyQGIS, QGIS 3.36+ und 4.x" },
+  "strip": {
+    "svg": "qgis-flow",
+    "labels": {
+      "assistant": { "es": "Asistente IA", "en": "AI assistant", "de": "KI-Assistent" },
+      "server": { "es": "Servidor MCP", "en": "MCP server", "de": "MCP-Server" },
+      "plugin": { "es": "Plugin QGIS", "en": "QGIS plugin", "de": "QGIS-Plugin" }
+    },
+    "caption": {
+      "es": "Arquitectura según el README: loopback, lista cerrada",
+      "en": "Architecture per README: loopback, allowlist",
+      "de": "Architektur laut README: Loopback, Whitelist"
+    }
+  },
+
+  "repo": "https://github.com/alberttkd/qgis-safe-mcp",
+
+  "headline": "QGIS Safe MCP",
+  "lead": {
+    "es": "Asistentes de IA en QGIS: con permisos, con registro y sin código arbitrario. Un plugin de QGIS y un servidor MCP.",
+    "en": "AI assistants in QGIS: with permissions, with a log, without arbitrary code. A QGIS plugin and an MCP server.",
+    "de": "KI-Assistenten in QGIS: mit Rechten, mit Protokoll, ohne beliebigen Code. Ein QGIS-Plugin und ein MCP-Server."
+  },
+
+  "metric": {
+    "value": "19",
+    "label": {
+      "es": "herramientas en una lista cerrada. Sin exec ni eval: cada acción es una función fija con parámetros validados.",
+      "en": "tools in a closed list. No exec, no eval: every action is a fixed function with validated parameters.",
+      "de": "Werkzeuge in einer geschlossenen Liste. Kein exec, kein eval: Jede Aktion ist eine feste Funktion mit geprüften Parametern."
+    }
+  },
+  "facts": [
+    {
+      "value": "7",
+      "label": {
+        "es": "barreras entre el asistente y QGIS: loopback, tamaño, token, lista cerrada, Processing, confirmación y registro.",
+        "en": "barriers between the assistant and QGIS: loopback, size, token, allowlist, Processing, confirmation, log.",
+        "de": "Schranken zwischen Assistent und QGIS: Loopback, Größe, Token, Whitelist, Processing, Rückfrage, Protokoll."
+      }
+    },
+    {
+      "value": "6/19",
+      "label": {
+        "es": "herramientas modifican el proyecto o archivos. En modo manual, QGIS pregunta antes.",
+        "en": "tools change the project or files. In manual mode QGIS asks first.",
+        "de": "Werkzeuge ändern Projekt oder Dateien. Im manuellen Modus fragt QGIS vorher."
+      }
+    },
+    {
+      "value": "25",
+      "label": {
+        "es": "algoritmos de Processing permitidos por defecto; la lista se edita en el panel.",
+        "en": "Processing algorithms allowed by default; the list is editable in the panel.",
+        "de": "Processing-Algorithmen voreingestellt erlaubt; die Liste ist im Panel änderbar."
+      }
+    }
+  ],
+
+  "story": {
+    "problem": {
+      "es": "**Acceso a herramientas sin límites.** Un modelo de lenguaje con acceso a herramientas puede modificar datos, sobrescribir archivos o cerrar proyectos. Un acceso abierto a Python en QGIS se lo permitiría todo, incluido código arbitrario.",
+      "en": "**Tool access without limits.** A language model with tool access can change data, overwrite files or close projects. Open Python access to QGIS would allow it everything, including arbitrary code.",
+      "de": "**Werkzeugzugriff ohne Grenzen.** Ein Sprachmodell mit Werkzeugzugriff kann Daten ändern, Dateien überschreiben oder Projekte schließen. Ein offener Python-Zugang zu QGIS würde ihm alles erlauben, auch beliebigen Code."
+    },
+    "approach": {
+      "es": "**Un puente local con siete barreras.** Solo 127.0.0.1, un token por sesión, 19 herramientas fijas y Processing solo mediante una lista de algoritmos permitidos. En modo manual, una persona confirma cada cambio directamente en QGIS.",
+      "en": "**A local bridge with seven barriers.** 127.0.0.1 only, one token per session, 19 fixed tools, Processing only through an allowlist. In manual mode a person confirms every change directly in QGIS.",
+      "de": "**Eine lokale Brücke mit sieben Schranken.** Nur 127.0.0.1, ein Token pro Sitzung, 19 feste Werkzeuge, Processing nur über eine Whitelist. Im manuellen Modus bestätigt der Mensch jede Änderung direkt in QGIS."
+    },
+    "result": {
+      "es": "**Trabajo en QGIS, con trazabilidad.** El asistente consulta capas y atributos, ve el mapa como imagen, añade capas y ejecuta algoritmos de la lista permitida. Cada acción queda registrada. Funciona en QGIS 3.36+ y 4.x (Qt5 y Qt6).",
+      "en": "**Working with QGIS, traceably.** The assistant queries layers and attributes, sees the map as an image, adds layers and runs allowlisted algorithms. Every action is logged. Runs on QGIS 3.36+ and 4.x (Qt5 and Qt6).",
+      "de": "**QGIS-Arbeit, nachvollziehbar.** Der Assistent fragt Layer und Attribute ab, sieht die Karte als Bild, fügt Layer hinzu und startet Algorithmen der Whitelist. Jede Aktion wird protokolliert. Läuft unter QGIS 3.36+ und 4.x (Qt5 und Qt6)."
+    }
+  },
+
+  "meta": [
+    {
+      "label": { "es": "Rol", "en": "Role", "de": "Rolle" },
+      "value": {
+        "es": "Autor único: concepto, código, instalador y documentación.",
+        "en": "Sole author: concept, code, installer, docs.",
+        "de": "Alleiniger Autor: Konzept, Code, Installer, Doku."
+      }
+    },
+    { "label": { "es": "Herramientas", "en": "Stack", "de": "Stack" }, "value": "Python, PyQGIS, Qt, MCP" },
+    {
+      "label": { "es": "Licencia", "en": "Licence", "de": "Lizenz" },
+      "value": { "es": "GPL-2.0-or-later, igual que QGIS", "en": "GPL-2.0-or-later, same as QGIS", "de": "GPL-2.0-or-later, wie QGIS" }
+    },
+    {
+      "label": { "es": "Estado", "en": "Status", "de": "Stand" },
+      "value": {
+        "es": "Versión 0.1.0, experimental, desde octubre de 2026.",
+        "en": "Version 0.1.0, experimental, since October 2026.",
+        "de": "Version 0.1.0, experimentell, seit Oktober 2026."
+      }
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "figure",
+      "wide": true,
+      "title": { "es": "Arquitectura", "en": "Architecture", "de": "Architektur" },
+      "src": { "de": "assets/img/qgis-architecture-de.png", "en": "assets/img/qgis-architecture-en.png" },
+      "alt": {
+        "es": "Diagrama: el asistente de IA habla por stdio con el servidor MCP; este se conecta por TCP a 127.0.0.1 con el plugin de QGIS, donde seis barreras numeradas filtran cada petición antes de llegar a QGIS; un registro anota cada acción.",
+        "en": "Diagram: the AI assistant talks over stdio to the MCP server, which connects over TCP on 127.0.0.1 to the QGIS plugin, where six numbered barriers filter each request before it reaches QGIS; a log records every action.",
+        "de": "Diagramm: Der KI-Assistent spricht über stdio mit dem MCP-Server; dieser verbindet sich über TCP auf 127.0.0.1 mit dem QGIS-Plugin, wo sechs nummerierte Schranken jede Anfrage filtern, bevor sie QGIS erreicht; ein Protokoll hält jede Aktion fest."
+      },
+      "caption": {
+        "es": "Arquitectura desde el asistente hasta QGIS. El plugin se ejecuta en el hilo principal de QGIS; el servidor MCP solo reenvía. S1 a S7 son barreras; S5 se aplica a Processing y S6 a las acciones que modifican algo. Al iniciar, el plugin escribe el puerto y el token en `session.json`, en una carpeta privada, y el servidor los lee.",
+        "en": "Architecture from the assistant to QGIS. The plugin runs in the QGIS main thread; the MCP server forwards only. S1 to S7 are barriers; S5 applies to Processing, S6 to actions that change something. On start the plugin writes port and token to `session.json` in a private folder, and the server reads them.",
+        "de": "Architektur vom Assistenten bis QGIS. Das Plugin läuft im QGIS-Hauptthread; der MCP-Server leitet nur weiter. S1 bis S7 sind Schranken; S5 gilt für Processing, S6 für ändernde Aktionen. Beim Start schreibt das Plugin Port und Token in `session.json` in einem privaten Ordner, der Server liest sie."
+      },
+      "credit": {
+        "es": "Fuente: README y código del repositorio.",
+        "en": "Source: README and code in the repository.",
+        "de": "Quelle: README und Code im Repository."
+      }
+    },
+    {
+      "type": "table",
+      "stack": true,
+      "title": { "es": "Siete barreras", "en": "Seven barriers", "de": "Sieben Schranken" },
+      "head": [
+        { "es": "Barrera", "en": "Barrier", "de": "Schranke" },
+        { "es": "En el código", "en": "In the code", "de": "Im Code" }
+      ],
+      "rows": [
+        [
+          { "es": "**S1 Solo local.** Escucha únicamente en 127.0.0.1, con un puerto aleatorio por sesión; cualquier otra conexión se descarta.", "en": "**S1 Local only.** Listens on 127.0.0.1 only, random port per session; any other connection is dropped.", "de": "**S1 Nur lokal.** Lauscht nur auf 127.0.0.1, zufälliger Port pro Sitzung; andere Verbindungen werden abgebrochen." },
+          "isLoopback()"
+        ],
+        [
+          { "es": "**S2 Límites de tamaño.** Peticiones de hasta 1 MB, consultas de hasta 200 entidades, imágenes de mapa de hasta 2048 px por lado.", "en": "**S2 Size limits.** Requests up to 1 MB, queries up to 200 features, map images up to 2048 px per side.", "de": "**S2 Größenlimits.** Anfragen bis 1 MB, Abfragen bis 200 Objekte, Kartenbilder bis 2048 px Kantenlänge." },
+          "MAX_REQUEST_BYTES"
+        ],
+        [
+          { "es": "**S3 Token por sesión.** 256 bits, comparado en tiempo constante; tras 5 intentos fallidos el puente se apaga.", "en": "**S3 Per-session token.** 256 bits, compared in constant time; after 5 failed attempts the bridge shuts down.", "de": "**S3 Token pro Sitzung.** 256 bit, Vergleich in konstanter Zeit; nach 5 Fehlversuchen schaltet die Brücke ab." },
+          "compare_digest"
+        ],
+        [
+          { "es": "**S4 Lista cerrada.** 19 funciones fijas; las acciones desconocidas y los parámetros no válidos se rechazan.", "en": "**S4 Closed list.** 19 fixed functions; unknown actions and invalid parameters are rejected.", "de": "**S4 Geschlossene Liste.** 19 feste Funktionen; unbekannte Aktionen und falsche Parameter werden abgelehnt." },
+          "Dispatcher.handle"
+        ],
+        [
+          { "es": "**S5 Lista de Processing.** 25 algoritmos por defecto, editable en el panel; las salidas solo como ruta o TEMPORARY_OUTPUT.", "en": "**S5 Processing allowlist.** 25 algorithms by default, editable in the panel; outputs only as a path or TEMPORARY_OUTPUT.", "de": "**S5 Processing-Whitelist.** 25 Algorithmen voreingestellt, im Panel änderbar; Ausgaben nur als Pfad oder TEMPORARY_OUTPUT." },
+          "DEFAULT_ALGORITHMS"
+        ],
+        [
+          { "es": "**S6 Confirmación o carpeta de trabajo.** Manual: diálogo en QGIS con «No» preseleccionado. Automático: solo escribe dentro de la carpeta de trabajo.", "en": "**S6 Confirmation or work folder.** Manual: dialog in QGIS, “No” preselected. Automatic: writes only inside the work folder.", "de": "**S6 Rückfrage oder Arbeitsordner.** Manuell: Dialog in QGIS, vorausgewählt ist „Nein“. Automatisch: Schreiben nur im Arbeitsordner." },
+          "_check_write"
+        ],
+        [
+          { "es": "**S7 Registro.** Cada acción aparece en el panel y en el registro de mensajes de QGIS (pestaña «QGIS Safe MCP»).", "en": "**S7 Log.** Every action is shown in the panel and in the QGIS message log (tab “QGIS Safe MCP”).", "de": "**S7 Protokoll.** Jede Aktion steht im Panel und im QGIS-Meldungsprotokoll (Reiter „QGIS Safe MCP“)." },
+          "QgsMessageLog"
+        ]
+      ]
+    },
+    {
+      "type": "table",
+      "stack": true,
+      "title": { "es": "19 herramientas en cuatro grupos", "en": "19 tools in four groups", "de": "19 Werkzeuge in vier Gruppen" },
+      "head": [
+        { "es": "Grupo y herramientas", "en": "Group and tools", "de": "Gruppe und Werkzeuge" },
+        { "es": "Modo manual", "en": "Manual mode", "de": "Manueller Modus" }
+      ],
+      "rows": [
+        [
+          { "es": "**Leer (7).** `get_bridge_info`, `get_project_info`, `list_layers`, `describe_layer`, `get_layer_features`, `get_map_image`, `list_allowed_algorithms`", "en": "**Read (7).** `get_bridge_info`, `get_project_info`, `list_layers`, `describe_layer`, `get_layer_features`, `get_map_image`, `list_allowed_algorithms`", "de": "**Lesen (7).** `get_bridge_info`, `get_project_info`, `list_layers`, `describe_layer`, `get_layer_features`, `get_map_image`, `list_allowed_algorithms`" },
+          { "es": "no pregunta", "en": "does not ask", "de": "ohne Rückfrage" }
+        ],
+        [
+          { "es": "**Vista y selección (3).** `zoom_to_layer`, `set_layer_visibility`, `select_by_expression`", "en": "**View, selection (3).** `zoom_to_layer`, `set_layer_visibility`, `select_by_expression`", "de": "**Ansicht, Auswahl (3).** `zoom_to_layer`, `set_layer_visibility`, `select_by_expression`" },
+          { "es": "no pregunta", "en": "does not ask", "de": "ohne Rückfrage" }
+        ],
+        [
+          { "es": "**Añadir capas (3).** `add_vector_layer`, `add_raster_layer`, `add_xyz_layer` (https)", "en": "**Add layers (3).** `add_vector_layer`, `add_raster_layer`, `add_xyz_layer` (https)", "de": "**Layer hinzufügen (3).** `add_vector_layer`, `add_raster_layer`, `add_xyz_layer` (https)" },
+          { "es": "no pregunta", "en": "does not ask", "de": "ohne Rückfrage" }
+        ],
+        [
+          { "es": "**Modificar y escribir (6).** `remove_layer`, `run_processing`, `export_map_image`, `save_project`, `load_project`, `new_project`", "en": "**Change, write (6).** `remove_layer`, `run_processing`, `export_map_image`, `save_project`, `load_project`, `new_project`", "de": "**Ändern, Schreiben (6).** `remove_layer`, `run_processing`, `export_map_image`, `save_project`, `load_project`, `new_project`" },
+          { "es": "pregunta", "en": "asks", "de": "Rückfrage" }
+        ]
+      ],
+      "emphasis": 3,
+      "note": {
+        "es": "El modo manual es el predeterminado. El automático solo se activa tras una confirmación explícita en el panel: entonces no hay preguntas, se escribe solo en la carpeta de trabajo y, si hay cambios sin guardar, se rechaza abrir o crear un proyecto. El puente nunca arranca solo y se apaga con QGIS.",
+        "en": "Manual is the default. Automatic only after explicit confirmation in the panel: then there are no questions, writing is limited to the work folder and, with unsaved changes, opening or creating a project is refused. The bridge never starts by itself and shuts down with QGIS.",
+        "de": "Manuell ist Standard. Automatisch erst nach ausdrücklicher Bestätigung im Panel: dann ohne Rückfrage, Schreiben nur im Arbeitsordner; bei ungespeicherten Änderungen wird Projekt öffnen oder neu abgelehnt. Die Brücke startet nie von selbst und schaltet mit QGIS ab."
+      }
+    },
+    {
+      "type": "steps",
+      "title": { "es": "Una sesión, paso a paso", "en": "A session, step by step", "de": "Eine Sitzung, Schritt für Schritt" },
+      "items": [
+        {
+          "title": { "es": "Iniciar", "en": "Start", "de": "Starten" },
+          "text": { "es": "«Iniciar» en el panel: puerto aleatorio y token nuevo, ambos en `session.json`.", "en": "“Iniciar” in the panel: random port, new token, both in `session.json`.", "de": "„Iniciar“ im Panel: zufälliger Port, neues Token, beides in `session.json`." }
+        },
+        {
+          "title": { "es": "Pedir", "en": "Request", "de": "Anfragen" },
+          "text": { "es": "El asistente llama a una herramienta; el servidor envía una línea JSON con el token.", "en": "The assistant calls a tool; the server sends one JSON line with the token.", "de": "Der Assistent ruft ein Werkzeug; der Server sendet eine JSON-Zeile mit Token." }
+        },
+        {
+          "title": { "es": "Comprobar", "en": "Check", "de": "Prüfen" },
+          "text": { "es": "Loopback, tamaño, token, acción y parámetros. Los errores vuelven como mensaje.", "en": "Loopback, size, token, action, parameters. Errors return as a message.", "de": "Loopback, Größe, Token, Aktion, Parameter. Fehler kommen als Meldung zurück." }
+        },
+        {
+          "title": { "es": "Confirmar", "en": "Confirm", "de": "Bestätigen" },
+          "text": { "es": "En modo manual, QGIS muestra la acción, los parámetros y las rutas de destino. La persona decide.", "en": "In manual mode QGIS shows action, parameters and target paths. The person decides.", "de": "Manuell zeigt QGIS Aktion, Parameter und Zielpfade. Der Mensch entscheidet." }
+        },
+        {
+          "title": { "es": "Ejecutar", "en": "Execute", "de": "Ausführen" },
+          "text": { "es": "En el hilo principal de QGIS, una petición cada vez, con su entrada en el registro.", "en": "In the QGIS main thread, one request at a time, with a log entry.", "de": "Im QGIS-Hauptthread, eine Anfrage nach der anderen, mit Protokolleintrag." }
+        },
+        {
+          "title": { "es": "Detener", "en": "Stop", "de": "Beenden" },
+          "text": { "es": "«Detener» o cerrar QGIS: puerto cerrado y archivo de sesión borrado.", "en": "“Detener” or closing QGIS: port closed, session file deleted.", "de": "„Detener“ oder QGIS schließen: Port zu, Sitzungsdatei gelöscht." }
+        }
+      ]
+    },
+    {
+      "type": "lists",
+      "items": [
+        {
+          "title": { "es": "Límites conocidos", "en": "Known limits", "de": "Bekannte Grenzen" },
+          "items": [
+            {
+              "es": "Versión 0.1.0, experimental. Instalador solo para Windows; panel en español. El proyecto no cubre las citas de fuentes en las respuestas de la IA.",
+              "en": "Version 0.1.0, experimental. Installer for Windows only; panel in Spanish. Source citations for AI answers are not covered by the project.",
+              "de": "Version 0.1.0, experimentell. Installer nur für Windows; Panel auf Spanisch. Quellenangaben für KI-Antworten deckt das Projekt nicht ab."
+            },
+            {
+              "es": "Según el README: un programa malicioso que ya se ejecute con tu usuario podría leer el archivo de sesión. Ese mismo programa también podría modificar directamente los plugins de QGIS, así que el puente no añade un riesgo nuevo.",
+              "en": "From the README (translated from Spanish): a malicious program already running under your user could read the session file. That same program could also modify your QGIS plugins directly, so the bridge adds no new risk.",
+              "de": "Laut README (aus dem Spanischen übersetzt): Ein Schadprogramm, das schon unter dem eigenen Benutzer läuft, könnte die Sitzungsdatei lesen. Es könnte aber auch die QGIS-Plugins direkt ändern; die Brücke bringt kein neues Risiko."
+            }
+          ]
+        },
+        {
+          "title": { "es": "Lecciones aprendidas", "en": "Lessons learned", "de": "Gelernt" },
+          "items": [
+            {
+              "es": "**Herramientas PyQGIS robustas.** Todo se ejecuta en el hilo principal de QGIS; mientras hay un diálogo abierto, las peticiones se ponen en cola. Los errores vuelven como mensajes y QGIS no se cierra.",
+              "en": "**Robust PyQGIS tools.** Everything runs in the QGIS main thread; while a dialog is open, requests are queued. Errors return as messages, QGIS does not crash.",
+              "de": "**PyQGIS robust bauen.** Alles im QGIS-Hauptthread; ist ein Dialog offen, werden Anfragen eingereiht. Fehler kommen als Meldung zurück, QGIS stürzt nicht ab."
+            },
+            {
+              "es": "**Qt5 y Qt6 con un solo código.** `qgis.PyQt` y enumeraciones totalmente cualificadas. En PyQt6, `exec()` devuelve un entero, así que se compara el botón pulsado.",
+              "en": "**Qt5 and Qt6 from one codebase.** `qgis.PyQt` and fully qualified enums. In PyQt6 `exec()` returns an int, so the clicked button is compared.",
+              "de": "**Qt5 und Qt6 mit einem Code.** `qgis.PyQt` und voll qualifizierte Enums. In PyQt6 liefert `exec()` eine Zahl: verglichen wird der geklickte Knopf."
+            },
+            {
+              "es": "Con las herramientas de IA, los permisos y la trazabilidad importan tanto como el modelo.",
+              "en": "With AI tools, permissions and traceability matter as much as the model.",
+              "de": "Bei KI-Werkzeugen zählen Rechte und Nachvollziehbarkeit so viel wie das Modell."
+            }
+          ]
+        },
+        {
+          "title": { "es": "Aplicable a", "en": "Transferable to", "de": "Übertragbar auf" },
+          "items": [
+            {
+              "es": "**Asistencia de IA con permisos y registro.** Lista de herramientas, confirmación y registro como patrón, por ejemplo para agentes que mantienen metadatos.",
+              "en": "**AI assistance with permissions and logging.** Tool list, confirmation and log as a pattern, e.g. for agents that maintain metadata.",
+              "de": "**KI-Assistenz mit Rechten und Protokollierung.** Werkzeugliste, Rückfrage und Protokoll als Muster, z. B. für Agenten, die Metadaten pflegen."
+            },
+            {
+              "es": "**Desarrollo de plugins de QGIS.** Panel acoplable, QgsSettings, integración con Processing e instalador.",
+              "en": "**QGIS plugin development.** Dock panel, QgsSettings, Processing integration, installer.",
+              "de": "**QGIS-Plugin-Entwicklung.** Panel, QgsSettings, Processing-Anbindung, Installer."
+            },
+            {
+              "es": "**Migración a QGIS/Python.** Herramientas especializadas como plugins de PyQGIS para QGIS 3 y QGIS 4.",
+              "en": "**Migration to QGIS/Python.** Specialist tools as PyQGIS plugins for QGIS 3 and QGIS 4.",
+              "de": "**Migration zu QGIS/Python.** Fachwerkzeuge als PyQGIS-Plugins für QGIS 3 und QGIS 4."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "credits": {
+    "es": "Fuente de todas las cifras: README y código del repositorio qgis-safe-mcp.",
+    "en": "Source of all figures: README and code of the qgis-safe-mcp repository.",
+    "de": "Quelle aller Angaben: README und Code des Repositorys qgis-safe-mcp."
+  }
+}

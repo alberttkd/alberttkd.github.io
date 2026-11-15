@@ -1,0 +1,7 @@
+<svg viewBox="0 0 800 130" preserveAspectRatio="xMidYMid meet" class="dia" xmlns="http://www.w3.org/2000/svg">
+  <rect x="14" y="42" width="196" height="54" class="box"/><text x="112" y="77" class="lbl" text-anchor="middle">{{assistant}}</text>
+  <path d="M211 69H296M287 64l9 5-9 5" class="ln"/><text x="253" y="30" class="sm" text-anchor="middle">stdio</text>
+  <rect x="298" y="42" width="172" height="54" class="box"/><text x="384" y="77" class="lbl" text-anchor="middle">{{server}}</text>
+  <path d="M471 69H604M595 64l9 5-9 5" class="ln"/><text x="537" y="30" class="sm" text-anchor="middle">TCP+Token</text>
+  <rect x="606" y="42" width="182" height="54" class="box strong"/><text x="697" y="77" class="lbl" text-anchor="middle">{{plugin}}</text>
+</svg>

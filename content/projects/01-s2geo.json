@@ -1,0 +1,357 @@
+{
+  "slug": "s2geo",
+  "title": {
+    "es": "s2geo: exactitud posicional de Sentinel-2",
+    "en": "s2geo: Sentinel-2 geolocation",
+    "de": "s2geo: Lagegenauigkeit Sentinel-2"
+  },
+  "kind": { "es": "Manuscrito en revisión", "en": "Manuscript under review", "de": "Manuskript in Begutachtung" },
+  "summary": {
+    "es": "Sentinel-2 L2A frente a las DOP20 del GeoSN: con Collection-1 el error posicional mediano baja de 6,00 m a 2,07 m (83 pares de escenas).",
+    "en": "Sentinel-2 L2A vs. GeoSN DOP20: with Collection-1 the median position error drops from 6.00 m to 2.07 m (83 scene pairs).",
+    "de": "Sentinel-2 L2A gegen DOP20 des GeoSN: Mit Collection-1 sinkt der mediane Lagefehler von 6,00 m auf 2,07 m (83 Szenenpaare)."
+  },
+  "stack": { "es": "Python, STAC, correlación de fase", "en": "Python, STAC, phase correlation", "de": "Python, STAC, Phasenkorrelation" },
+  "strip": {
+    "img": "assets/img/strip-s2geo.jpg",
+    "caption": "DOP20 © GeoSN, dl-de/by-2-0. Dresden, ETRS89/UTM 33N"
+  },
+
+  "repo": null,
+  "repoNote": {
+    "es": "Repositorio de código privado hasta la publicación.",
+    "en": "Code repository private until publication.",
+    "de": "Code-Repository bis zur Veröffentlichung privat."
+  },
+
+  "headline": {
+    "es": "¿Con qué exactitud coincide Sentinel-2 con el mapa?",
+    "en": "How well does Sentinel-2 hit the map?",
+    "de": "Wie genau trifft Sentinel-2 die Karte?"
+  },
+  "lead": {
+    "es": "Proyecto de investigación sobre la exactitud posicional de Sentinel-2 L2A en el Estado Libre de Sajonia. Comprobado con las ortofotos DOP20 del GeoSN: procesamiento original frente a Collection-1.",
+    "en": "Research project on the geolocation of Sentinel-2 L2A in the Free State of Saxony. Checked against GeoSN DOP20 orthophotos: original processing vs Collection-1.",
+    "de": "Forschungsprojekt zur Lagegenauigkeit von Sentinel-2 L2A im Freistaat Sachsen. Geprüft mit DOP20 des GeoSN: Original gegen Collection-1."
+  },
+
+  "metric": {
+    "value": { "es": "3,21", "en": "3.21", "de": "3,21" },
+    "unit": "m",
+    "label": {
+      "es": "menos de error posicional radial por adquisición tras el reprocesamiento Collection-1 de la ESA.",
+      "en": "less radial position error per acquisition after ESA’s Collection-1 reprocessing.",
+      "de": "weniger radialer Lagefehler pro Aufnahme nach der Collection-1-Reprozessierung der ESA."
+    },
+    "note": {
+      "es": "Estimación pareada de Hodges-Lehmann, IC del 95 %: 2,31 a 4,08 m. 83 pares, 50 datatakes, 2018 a 2020.",
+      "en": "Paired Hodges-Lehmann estimate, 95 % CI 2.31 to 4.08 m. 83 pairs, 50 datatakes, 2018 to 2020.",
+      "de": "Gepaarte Hodges-Lehmann-Schätzung, 95-%-KI 2,31 bis 4,08 m. 83 Paare, 50 Datatakes, 2018 bis 2020."
+    }
+  },
+  "facts": [
+    {
+      "value": { "es": "6,90", "en": "6.90", "de": "6,90" },
+      "unit": "m",
+      "label": {
+        "es": "CE95 de Collection-1 con las 197 escenas de 2018 a 2025. Especificación: menos de 12 m.",
+        "en": "CE95, Collection-1, all 197 scenes 2018 to 2025. Specification: below 12 m.",
+        "de": "CE95, Collection-1, alle 197 Szenen 2018 bis 2025. Vorgabe: unter 12 m."
+      }
+    },
+    {
+      "value": "73/83",
+      "label": {
+        "es": "pares mejoran con el reprocesamiento (88 %). Wilcoxon p = 3,5 × 10⁻¹⁰.",
+        "en": "pairs improved by reprocessing (88 %). Wilcoxon p = 3.5 × 10⁻¹⁰.",
+        "de": "Paare durch die Reprozessierung verbessert (88 %). Wilcoxon p = 3,5 × 10⁻¹⁰."
+      }
+    },
+    {
+      "value": { "es": "0,04", "en": "0.04", "de": "0,04" },
+      "unit": "m",
+      "label": {
+        "es": "Control: originales ya refinados frente a Collection-1 (22 pares), dentro del margen de equivalencia de ±1 m.",
+        "en": "Control: refined originals vs Collection-1 (22 pairs), within the ±1 m equivalence margin.",
+        "de": "Kontrolle: verfeinerte Originale gegen Collection-1 (22 Paare), innerhalb der Äquivalenzgrenze ±1 m."
+      }
+    }
+  ],
+
+  "story": {
+    "problem": {
+      "es": "La detección de cambios y la actualización cartográfica necesitan imágenes que coincidan exactamente con el mapa. La ESA ha reprocesado el archivo de Sentinel-2 como Collection-1; los primeros originales aún no estaban refinados con la referencia global. ¿Cuánto más cerca queda la nueva versión, medida con geodatos oficiales independientes?",
+      "en": "Change detection and map updating need images that sit exactly on the map. ESA has reprocessed the Sentinel-2 archive as Collection-1; early originals were not yet refined against the global reference. How much closer is the new version, measured with independent official geodata?",
+      "de": "Veränderungserkennung und Fortführung brauchen Bilder, die exakt auf der Karte liegen. Die ESA hat das Sentinel-2-Archiv als Collection-1 neu prozessiert; frühe Originale waren noch nicht an der globalen Referenz verfeinert. Wie viel genauer ist die neue Version, unabhängig gemessen mit amtlichen Geobasisdaten?"
+    },
+    "approach": {
+      "es": "Cada adquisición en sus dos versiones, frente a la misma referencia de 10 m y en los mismos nodos. Así se cancelan la iluminación, la estación del año y el contenido de la escena. Referencia: DOP20 del WMS del GeoSN, agregada de 2 m a 10 m. Desplazamientos: correlación de fase subpíxel. Estadística: CE95, sesgo y bootstrap por conglomerados (datatake).",
+      "en": "Each acquisition in both versions, against the same 10 m reference and on the same nodes. This cancels light, season and scene content. Reference: DOP20 from the GeoSN WMS, aggregated from 2 m to 10 m. Shifts: sub-pixel phase correlation. Statistics: CE95, bias, cluster bootstrap by datatake.",
+      "de": "Jede Aufnahme in beiden Versionen, gegen dieselbe 10-m-Referenz und an denselben Knoten. So heben sich Licht, Jahreszeit und Bildinhalt auf. Referenz: DOP20 aus dem WMS des GeoSN, von 2 m auf 10 m aggregiert. Verschiebung: Phasenkorrelation im Subpixelbereich. Statistik: CE95, Bias, Cluster-Bootstrap je Datatake."
+    },
+    "result": {
+      "es": "Collection-1 queda más cerca de la referencia. En las 83 adquisiciones pareadas, el error mediano baja de 6,00 m a 2,07 m y el CE95 de 9,78 m a 3,83 m; 73 de 83 puntos se acercan al centro. Los originales que ya estaban refinados no cambian de forma apreciable.",
+      "en": "Collection-1 sits closer to the reference. Over the 83 paired acquisitions the median error drops from 6.00 m to 2.07 m and CE95 from 9.78 m to 3.83 m; 73 of 83 dots move toward the centre. Originals that were already refined show no relevant change.",
+      "de": "Collection-1 liegt näher an der Referenz. Bei den 83 gepaarten Aufnahmen sinkt der mediane Fehler von 6,00 m auf 2,07 m und der CE95 von 9,78 m auf 3,83 m; 73 von 83 Punkten rücken zur Mitte. Bereits verfeinerte Originale ändern sich nicht nennenswert."
+    }
+  },
+
+  "meta": [
+    {
+      "label": { "es": "Autoría", "en": "Author", "de": "Autor" },
+      "value": {
+        "es": "Albert Johan Herrera Sánchez, autor único (CITATION.cff): diseño del estudio, pipeline en Python, análisis y manuscrito.",
+        "en": "Albert Johan Herrera Sánchez, sole author (CITATION.cff): study design, Python pipeline, analysis and manuscript.",
+        "de": "Albert Johan Herrera Sánchez, Alleinautor (CITATION.cff): Studiendesign, Python-Pipeline, Auswertung und Manuskript."
+      }
+    },
+    {
+      "label": { "es": "Herramientas", "en": "Stack", "de": "Werkzeuge" },
+      "value": "Python, rasterio, pyproj, scikit-image, SciPy, pandas, pystac-client, OGC WMS, STAC, pytest"
+    },
+    {
+      "label": { "es": "Sistema de referencia", "en": "Reference system", "de": "Bezugssystem" },
+      "value": "ETRS89 / UTM 33N, EPSG:25833"
+    },
+    {
+      "label": { "es": "Estado", "en": "Status", "de": "Stand" },
+      "value": { "es": "Proyecto de investigación, manuscrito en revisión.", "en": "Research project, manuscript under review.", "de": "Forschungsprojekt, Manuskript in Begutachtung." }
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "figure",
+      "narrow": true,
+      "title": {
+        "es": "Las mismas 83 adquisiciones, antes y después del reprocesamiento",
+        "en": "The same 83 acquisitions, before and after reprocessing",
+        "de": "Dieselben 83 Aufnahmen, vor und nach der Reprozessierung"
+      },
+      "src": { "de": "assets/img/s2geo-scatter-de.png", "en": "assets/img/s2geo-scatter-en.png" },
+      "alt": {
+        "es": "Diagrama de dispersión del error este y norte por escena. Los puntos del procesamiento original se reparten hasta unos 10 m, sobre todo hacia el sur; los de Collection-1 se agrupan cerca del centro.",
+        "en": "Scatter plot of east and north error per scene. The original-processing dots spread out to about 10 m, mostly southward; the Collection-1 dots cluster near the centre.",
+        "de": "Streudiagramm des Ost- und Nordfehlers je Szene. Die Punkte der Originalprozessierung streuen bis etwa 10 m, vor allem nach Süden; die Punkte von Collection-1 liegen nahe der Mitte."
+      },
+      "caption": {
+        "es": "Error por escena frente a la referencia de 10 m derivada de DOP20, nodos estables, ITRF en la época de adquisición. Puntos huecos: procesamiento original, sin refinar (U). Puntos llenos: Collection-1, misma adquisición. Líneas: desplazamiento causado por el reprocesamiento. Círculo CE95: contiene el 95 % de las escenas (9,78 m original, 3,83 m Collection-1). Recuadro: 1 píxel de Sentinel-2 (10 m).",
+        "en": "Error per scene against the 10 m DOP20 reference, stable nodes, ITRF at acquisition epoch. Hollow dots: original processing, not refined (U). Filled dots: Collection-1, same acquisition. Lines: shift caused by reprocessing. CE95 ring: 95 % of scenes inside (9.78 m original, 3.83 m Collection-1). Box: 1 Sentinel-2 pixel (10 m).",
+        "de": "Fehler je Szene gegen die 10-m-Referenz aus DOP20, stabile Knoten, ITRF zur Aufnahmeepoche. Offene Punkte: Originalprozessierung, nicht verfeinert (U). Gefüllte Punkte: Collection-1, dieselbe Aufnahme. Linien: Verschiebung durch die Reprozessierung. CE95-Kreis: 95 % der Szenen innerhalb (9,78 m Original, 3,83 m Collection-1). Rahmen: 1 Sentinel-2-Pixel (10 m)."
+      },
+      "credit": {
+        "es": "Redibujado a partir de outputs/tables/scenes_frames.csv; CE95 de numbers.json. DOP20 © GeoSN, dl-de/by-2-0. Contains modified Copernicus Sentinel data.",
+        "en": "Redrawn from outputs/tables/scenes_frames.csv; CE95 from numbers.json. DOP20 © GeoSN, dl-de/by-2-0. Contains modified Copernicus Sentinel data.",
+        "de": "Neu gezeichnet aus outputs/tables/scenes_frames.csv; CE95 aus numbers.json. DOP20 © GeoSN, dl-de/by-2-0. Contains modified Copernicus Sentinel data."
+      }
+    },
+    {
+      "type": "steps",
+      "title": { "es": "Método", "en": "Method", "de": "Methode" },
+      "intro": {
+        "es": "Un pipeline en Python que se puede reanudar, desde el inventario STAC hasta un archivo `numbers.json` legible por máquina. Cada decisión del investigador es una ficha de decisión (D1 a D4) que sigue una regla fijada de antemano.",
+        "en": "A resumable Python pipeline, from STAC inventory to a machine-readable `numbers.json`. Every researcher choice is a decision card (D1 to D4) that follows a pre-registered rule.",
+        "de": "Eine wiederaufnehmbare Python-Pipeline vom STAC-Inventar bis zur maschinenlesbaren `numbers.json`. Jede Forscherentscheidung ist eine Entscheidungskarte (D1 bis D4) mit vorab festgelegter Regel."
+      },
+      "items": [
+        {
+          "title": { "es": "Inventario y recortes", "en": "Inventory and chips", "de": "Inventar und Ausschnitte" },
+          "text": {
+            "es": "Sentinel-2 L2A vía Earth Search STAC, 2018 a 2025, abril a octubre. Original frente a Collection-1, pareados por datatake y tesela. Banda B04 y SCL, mínimo 90 % despejado.",
+            "en": "Sentinel-2 L2A via Earth Search STAC, 2018 to 2025, April to October. Original vs Collection-1, paired by datatake and tile. Band B04 and SCL, min. 90 % clear.",
+            "de": "Sentinel-2 L2A über Earth Search STAC, 2018 bis 2025, April bis Oktober. Original gegen Collection-1, gepaart nach Datatake und Kachel. Band B04 und SCL, mind. 90 % klar."
+          }
+        },
+        {
+          "title": { "es": "Referencia de 10 m", "en": "10 m reference", "de": "10-m-Referenz" },
+          "text": {
+            "es": "DOP20 del WMS del GeoSN (GSD de 2 m, 2 épocas, EPSG:25833), agregada a 10 m con una media de 5 × 5. Prueba de época por nodo: estable hasta 3 m (0,3 px).",
+            "en": "DOP20 from the GeoSN WMS (2 m GSD, 2 epochs, EPSG:25833), aggregated to 10 m with a 5 × 5 mean. Epoch test per node: stable up to 3 m (0.3 px).",
+            "de": "DOP20 aus dem WMS des GeoSN (2 m GSD, 2 Epochen, EPSG:25833), mit einem 5 × 5-Mittel auf 10 m aggregiert. Epochentest je Knoten: stabil bis 3 m (0,3 px)."
+          }
+        },
+        {
+          "title": { "es": "Correspondencia subpíxel", "en": "Sub-pixel matching", "de": "Subpixel-Matching" },
+          "text": {
+            "es": "Correlación de fase local: ventanas de 128 px, paso de 64, sobremuestreo a 1/50 px, pico mínimo de 0,15 y filtro de 3 MAD.",
+            "en": "Local phase correlation: 128 px windows, step 64, upsampling to 1/50 px, peak min. 0.15, 3 MAD filter.",
+            "de": "Lokale Phasenkorrelation: Fenster 128 px, Schritt 64, Upsampling auf 1/50 px, Peak mind. 0,15, 3-MAD-Filter."
+          }
+        },
+        {
+          "title": { "es": "Estadística", "en": "Statistics", "de": "Statistik" },
+          "text": {
+            "es": "CE95 y sesgo este/norte. Pareado: Hodges-Lehmann y Wilcoxon por datatake. Bootstrap por conglomerados (datatake), 2 000 repeticiones. Marco ITRF frente a ETRS89. Salida: `numbers.json`.",
+            "en": "CE95 and bias east/north. Paired: Hodges-Lehmann and Wilcoxon per datatake. Cluster bootstrap by datatake, 2 000 resamples. Frame ITRF vs ETRS89. Output: `numbers.json`.",
+            "de": "CE95 und Bias Ost/Nord. Gepaart: Hodges-Lehmann und Wilcoxon je Datatake. Cluster-Bootstrap je Datatake, 2 000 Wiederholungen. Bezug ITRF gegen ETRS89. Ausgabe: `numbers.json`."
+          }
+        }
+      ]
+    },
+    {
+      "type": "figures",
+      "items": [
+        {
+          "plate": true,
+          "src": "assets/img/s2geo-study-area.jpg",
+          "alt": {
+            "es": "Mapa de Sajonia con tres áreas de estudio marcadas y, a la derecha, tres recortes de la referencia de 10 m.",
+            "en": "Map of Saxony with three marked study areas and, on the right, three chips of the 10 m reference.",
+            "de": "Karte von Sachsen mit drei markierten Untersuchungsflächen und rechts drei Ausschnitten der 10-m-Referenz."
+          },
+          "caption": {
+            "es": "Área de estudio, ETRS89 / UTM 33N: tres áreas de 10 × 10 km, de 98 a 843 m de altitud. A la derecha, de arriba abajo: DRS, CHE y ALT como referencia de 10 m simulada a partir de DOP20.",
+            "en": "Study area, ETRS89 / UTM 33N: three 10 × 10 km areas, 98 to 843 m. Right, top to bottom: DRS, CHE, ALT as 10 m reference simulated from DOP20.",
+            "de": "Untersuchungsgebiet, ETRS89 / UTM 33N: drei Flächen 10 × 10 km, 98 bis 843 m. Rechts von oben: DRS, CHE, ALT als aus DOP20 simulierte 10-m-Referenz."
+          },
+          "credit": {
+            "es": "WebAtlasSN, DOP20 © GeoSN, dl-de/by-2-0. Fuente: figura F1 del repositorio.",
+            "en": "WebAtlasSN, DOP20 © GeoSN, dl-de/by-2-0. Source: repository figure F1.",
+            "de": "WebAtlasSN, DOP20 © GeoSN, dl-de/by-2-0. Quelle: Repo-Abbildung F1."
+          }
+        },
+        {
+          "plate": true,
+          "src": "assets/img/s2geo-multitemporal.png",
+          "alt": {
+            "es": "Curvas acumuladas del desregistro multitemporal: la de Collection-1 queda a la izquierda de la de los originales sin refinar.",
+            "en": "Cumulative curves of multi-temporal misregistration: the Collection-1 curve lies to the left of the unrefined originals.",
+            "de": "Kumulierte Kurven der multitemporalen Fehlregistrierung: Die Kurve von Collection-1 liegt links von der der nicht verfeinerten Originale."
+          },
+          "caption": {
+            "es": "Desregistro multitemporal de los pares de nodos, acumulado (1 px = 10 m, UTM 33N). Azul: Collection-1 sobre las mismas adquisiciones que los originales sin refinar (naranja). Líneas: requisitos de 0,3 px (DQR 72) y 0,5 px (DQR 128).",
+            "en": "Multi-temporal misregistration of node pairs, cumulative (1 px = 10 m, UTM 33N). Blue: Collection-1 on the same acquisitions as the unrefined originals (orange). Lines: requirements 0.3 px (DQR 72) and 0.5 px (DQR 128).",
+            "de": "Multitemporale Fehlregistrierung der Knotenpaare, kumuliert (1 px = 10 m, UTM 33N). Blau: Collection-1 auf denselben Aufnahmen wie die nicht verfeinerten Originale (orange). Linien: Anforderung 0,3 px (DQR 72) und 0,5 px (DQR 128)."
+          },
+          "credit": {
+            "es": "Fuente: figura F7 del repositorio. Contains modified Copernicus Sentinel data.",
+            "en": "Source: repository figure F7. Contains modified Copernicus Sentinel data.",
+            "de": "Quelle: Repo-Abbildung F7. Contains modified Copernicus Sentinel data."
+          }
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": {
+        "es": "Presupuesto de incertidumbre de la referencia (1 sigma)",
+        "en": "Uncertainty budget of the reference (1 sigma)",
+        "de": "Unsicherheitsbudget der Referenz (1 Sigma)"
+      },
+      "head": [
+        { "es": "Componente", "en": "Component", "de": "Beitrag" },
+        { "es": "Valor", "en": "Value", "de": "Wert" }
+      ],
+      "rows": [
+        [{ "es": "Época de la DOP / iluminación", "en": "DOP epoch / illumination", "de": "DOP-Epoche / Beleuchtung" }, { "es": "0,94 m", "en": "0.94 m", "de": "0,94 m" }],
+        [{ "es": "Exactitud posicional de la DOP (GeoSN)", "en": "DOP positional accuracy (GeoSN)", "de": "DOP-Lagegenauigkeit (GeoSN)" }, { "es": "0,57 m", "en": "0.57 m", "de": "0,57 m" }],
+        [{ "es": "Registro de píxeles del WMS", "en": "WMS pixel registration", "de": "WMS-Pixelregistrierung" }, { "es": "0,14 m", "en": "0.14 m", "de": "0,14 m" }],
+        [{ "es": "Correspondencia (benchmark)", "en": "Matching (benchmark)", "de": "Matching (Benchmark)" }, { "es": "0,06 m", "en": "0.06 m", "de": "0,06 m" }],
+        [{ "es": "Realización de ETRS89", "en": "ETRS89 realisation", "de": "Realisierung ETRS89" }, { "es": "0,05 m", "en": "0.05 m", "de": "0,05 m" }],
+        [{ "es": "u_c combinada", "en": "u_c combined", "de": "u_c kombiniert" }, { "es": "1,11 m", "en": "1.11 m", "de": "1,11 m" }]
+      ],
+      "emphasis": 5,
+      "note": {
+        "es": "U (k = 2) = 2,22 m. El GeoSN indica 0,4 m para las DOP; se usa como 0,57 m radial (conservador). Fuente: tabla T6 del repositorio.",
+        "en": "U (k = 2) = 2.22 m. GeoSN states 0.4 m for the DOP, used as 0.57 m radial (conservative). Source: repository table T6.",
+        "de": "U (k = 2) = 2,22 m. GeoSN gibt 0,4 m für die DOP an, angesetzt als 0,57 m radial (konservativ). Quelle: Repo-Tabelle T6."
+      }
+    },
+    {
+      "type": "lists",
+      "items": [
+        {
+          "title": { "es": "Validación y robustez", "en": "Validation and robustness", "de": "Validierung und Robustheit" },
+          "items": [
+            {
+              "es": "**Benchmark.** 39 escenas sintéticas con desplazamientos conocidos de hasta 1,5 px: error mediano de 0,005 px, máximo de 0,010 px.",
+              "en": "**Benchmark.** 39 synthetic scenes, known shifts up to 1.5 px: median error 0.005 px, max. 0.010 px.",
+              "de": "**Benchmark.** 39 synthetische Szenen, bekannte Verschiebung bis 1,5 px: Median-Fehler 0,005 px, max. 0,010 px."
+            },
+            {
+              "es": "**Referencia.** Las épocas de la DOP coinciden dentro de 0,2 m a 2 m, pero difieren hasta 2,26 m a 10 m. La exactitud absoluta usa solo nodos estables (50 a 94 %).",
+              "en": "**Reference.** DOP epochs agree within 0.2 m at 2 m, but differ up to 2.26 m at 10 m. Absolute accuracy uses stable nodes only (50 to 94 %).",
+              "de": "**Referenz.** DOP-Epochen stimmen bei 2 m auf 0,2 m überein, bei 10 m bis 2,26 m Abweichung. Absolute Genauigkeit nur an stabilen Knoten (50 bis 94 %)."
+            },
+            {
+              "es": "**Bootstrap.** IC del 95 % a partir de 2 000 remuestreos por conglomerados (datatake).",
+              "en": "**Bootstrap.** 95 % CIs from 2 000 cluster resamples by datatake.",
+              "de": "**Bootstrap.** 95-%-KI aus 2 000 Cluster-Stichproben je Datatake."
+            },
+            {
+              "es": "**Datum.** Errores en ITRF: el desfase respecto a ETRS89 (0,76 a 0,94 m, movimiento de placas) no se atribuye al satélite.",
+              "en": "**Datum.** Errors in ITRF: the ETRS89 offset (0.76 to 0.94 m, plate motion) is not blamed on the satellite.",
+              "de": "**Bezug.** Fehler in ITRF: Der ETRS89-Versatz (0,76 bis 0,94 m, Plattenbewegung) wird nicht dem Satelliten angelastet."
+            },
+            {
+              "es": "**Pruebas.** 52 pruebas con pytest; CI con Python 3.11 y 3.12; umbrales en `config.yaml`.",
+              "en": "**Tests.** 52 pytest tests; CI on Python 3.11 and 3.12; thresholds in `config.yaml`.",
+              "de": "**Tests.** 52 pytest-Tests; CI mit Python 3.11 und 3.12; Schwellenwerte in `config.yaml`."
+            }
+          ]
+        },
+        {
+          "title": { "es": "Límites", "en": "Limits", "de": "Grenzen" },
+          "items": [
+            {
+              "es": "Tres áreas en un solo Land y una sola zona UTM; solo la banda B04; de abril a octubre.",
+              "en": "Three areas in one Land and one UTM zone; band B04 only; April to October.",
+              "de": "Drei Flächen in einem Land und einer UTM-Zone; nur Band B04; April bis Oktober."
+            },
+            {
+              "es": "Referencia de 10 m simulada: el contenido de la época de la DOP es el mayor término de incertidumbre (0,94 m).",
+              "en": "Simulated 10 m reference: DOP epoch content is the largest uncertainty term (0.94 m).",
+              "de": "Simulierte 10-m-Referenz: Der Inhalt der DOP-Epoche ist der größte Unsicherheitsterm (0,94 m)."
+            },
+            {
+              "es": "Intervalo amplio del CE95 de Collection-1 (4,91 a 11,04 m): 8 escenas de 4 datatakes quedan más de 8 m al sur.",
+              "en": "Wide CE95 interval for Collection-1 (4.91 to 11.04 m): 8 scenes from 4 datatakes lie over 8 m south.",
+              "de": "Breites CE95-Intervall für Collection-1 (4,91 bis 11,04 m): 8 Szenen aus 4 Datatakes liegen über 8 m zu weit südlich."
+            },
+            {
+              "es": "El error norte depende de la elevación solar: +0,074 m por grado (IC 0,024 a 0,131).",
+              "en": "North error depends on sun elevation: +0.074 m per degree (CI 0.024 to 0.131).",
+              "de": "Der Nordfehler hängt von der Sonnenhöhe ab: +0,074 m pro Grad (KI 0,024 bis 0,131)."
+            },
+            {
+              "es": "Collection-1 multitemporal: 0,84 px al 95 % (IC 0,48 a 0,97), por encima del requisito de 0,3 px.",
+              "en": "Multi-temporal Collection-1: 0.84 px at 95 % (CI 0.48 to 0.97), above the 0.3 px requirement.",
+              "de": "Multitemporal Collection-1: 0,84 px bei 95 % (KI 0,48 bis 0,97), über der Anforderung 0,3 px."
+            }
+          ]
+        },
+        {
+          "title": { "es": "Aplicable a", "en": "Transferable to", "de": "Übertragbar auf" },
+          "items": [
+            {
+              "es": "**Control de calidad de geodatos.** Comprobación independiente de datos oficiales con CE95, sesgo, intervalos de confianza y un presupuesto al estilo GUM.",
+              "en": "**QA of geodata.** Independent checks of official data with CE95, bias, CIs and a GUM-style budget.",
+              "de": "**QS Geodaten.** Unabhängige Prüfung amtlicher Daten mit CE95, Bias, KI und Budget nach GUM."
+            },
+            {
+              "es": "**Exactitud posicional.** La misma lógica de prueba para imágenes y productos frente a DOP y datos geográficos de base.",
+              "en": "**Position.** The same test logic for imagery and products against DOP and Geobasisdaten.",
+              "de": "**Lagegenauigkeit.** Dieselbe Prüflogik für Bilddaten und Produkte gegen DOP und Geobasisdaten."
+            },
+            {
+              "es": "**Corregistro.** Alineación subpíxel como primer paso de la detección de cambios para la actualización cartográfica.",
+              "en": "**Co-registration.** Sub-pixel alignment as the first step of change detection for map updating.",
+              "de": "**Koregistrierung.** Subpixel-Ausrichtung als erster Schritt der Veränderungserkennung für die Fortführung."
+            },
+            {
+              "es": "**WMS abiertos.** Uso cuidadoso y reproducible de los geoservicios del GeoSN, con pruebas de GSD y de época.",
+              "en": "**Open WMS.** Careful, reproducible use of GeoSN geoservices, with GSD and epoch tests.",
+              "de": "**Offene WMS.** Sorgfältige, reproduzierbare Nutzung der GeoSN-Geodienste mit GSD- und Epochentests."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "credits": {
+    "es": "Datos: DOP20 y WebAtlasSN © GeoSN, dl-de/by-2-0. Contains modified Copernicus Sentinel data (2018 a 2025), vía Earth Search (Element 84). Copernicus DEM GLO-30 © DLR e.V. 2010-2014 y © Airbus Defence and Space GmbH 2014-2018, distribuido por ESA/Copernicus. Figuras: repositorio s2geo, outputs/figures.",
+    "en": "Data: DOP20 and WebAtlasSN © GeoSN, dl-de/by-2-0. Contains modified Copernicus Sentinel data (2018 to 2025), via Earth Search (Element 84). Copernicus DEM GLO-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018, distributed by ESA/Copernicus. Figures: s2geo repository, outputs/figures.",
+    "de": "Daten: DOP20 und WebAtlasSN © GeoSN, dl-de/by-2-0. Contains modified Copernicus Sentinel data (2018 bis 2025), via Earth Search (Element 84). Copernicus DEM GLO-30 © DLR e.V. 2010-2014 und © Airbus Defence and Space GmbH 2014-2018, bereitgestellt von ESA/Copernicus. Abbildungen: Repository s2geo, outputs/figures."
+  }
+}

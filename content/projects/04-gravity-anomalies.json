@@ -1,0 +1,358 @@
+{
+  "slug": "gravity-anomalies",
+  "title": { "es": "Anomalías de gravedad, Colombia", "en": "Gravity anomalies, Colombia", "de": "Schwereanomalien Kolumbien" },
+  "kind": { "es": "Manuscrito metodológico", "en": "Methods manuscript", "de": "Methodenmanuskript" },
+  "summary": {
+    "es": "Reducción e interpolación de anomalías de aire libre y de Bouguer con incertidumbre. Resultados solo a partir de un benchmark sintético.",
+    "en": "Reduction and gridding of free-air and Bouguer anomalies with uncertainty. Results from a synthetic benchmark only.",
+    "de": "Reduktion und Gridding von Freiluft- und Bouguer-Anomalien mit Unsicherheit. Ergebnisse nur aus synthetischem Benchmark."
+  },
+  "stack": "Python, Harmonica, Verde, FastAPI",
+  "strip": {
+    "img": "assets/img/strip-gravity.jpg",
+    "caption": {
+      "es": "Datos sintéticos (CC BY 4.0), perfiles de medición",
+      "en": "Synthetic data (CC BY 4.0), survey lines",
+      "de": "Synthetische Daten (CC BY 4.0), Messprofile"
+    }
+  },
+
+  "repo": "https://github.com/alberttkd/static-gravity-anomalies-colombia",
+
+  "headline": {
+    "es": "Anomalías de gravedad con incertidumbre calibrada",
+    "en": "Gravity anomalies with calibrated uncertainty",
+    "de": "Schwereanomalien mit kalibrierter Unsicherheit"
+  },
+  "lead": {
+    "es": "De compilaciones históricas heterogéneas a mapas de Bouguer de calidad conocida. Anomalías FAA, SBA y CBA en un paquete de Python, una API y una aplicación web. Región de estudio: norte de Colombia.",
+    "en": "From heterogeneous legacy compilations to Bouguer maps of known quality. FAA, SBA and CBA anomalies in a Python package, an API and a web app. Study region: northern Colombia.",
+    "de": "Von heterogenen Altdaten zu Bouguer-Karten bekannter Qualität. FAA-, SBA- und CBA-Anomalien in einem Python-Paket, einer API und einer Web-App. Studienregion: Nordkolumbien."
+  },
+  "notice": {
+    "es": "Todas las cifras de esta hoja proceden de un benchmark sintético determinista (semilla 20261022). Los datos históricos reales del norte de Colombia tienen procedencia y licencia poco claras y no se publican.",
+    "en": "All numbers on this sheet: deterministic synthetic benchmark (seed 20261022). The real legacy data from northern Colombia have unclear provenance and licence and are not published.",
+    "de": "Alle Zahlen auf diesem Blatt: deterministischer synthetischer Benchmark (Seed 20261022). Die realen Altdaten aus Nordkolumbien haben unklare Herkunft und Lizenz und bleiben unveröffentlicht."
+  },
+
+  "metric": {
+    "value": { "es": "0,956", "en": "0.956", "de": "0,956" },
+    "label": {
+      "es": "de cobertura al 95 %: proporción de valores reservados que cae dentro del intervalo calibrado del 95 % del kriging.",
+      "en": "95 % coverage: share of held-out values inside the calibrated 95 % kriging interval.",
+      "de": "95-%-Überdeckung: Anteil der zurückgehaltenen Werte im kalibrierten 95-%-Intervall des Krigings."
+    },
+    "note": {
+      "es": "Nominal: 0,95. Frente al campo verdadero: 0,953.",
+      "en": "Nominal: 0.95. Against the true field: 0.953.",
+      "de": "Soll: 0,95. Gegen das wahre Feld: 0,953."
+    }
+  },
+  "facts": [
+    {
+      "value": { "es": "0,74", "en": "0.74", "de": "0,74" },
+      "unit": "mGal",
+      "label": {
+        "es": "RMSE del kriging con validación cruzada por bloques espaciales. IDW: 2,49 mGal.",
+        "en": "RMSE of kriging under spatial block CV. IDW: 2.49 mGal.",
+        "de": "RMSE des Krigings bei räumlicher Block-CV. IDW: 2,49 mGal."
+      }
+    },
+    {
+      "value": "9/9",
+      "label": {
+        "es": "defectos inyectados en los datos, marcados por el control de calidad. No se borra ningún registro.",
+        "en": "injected data defects flagged by QC. No record is deleted.",
+        "de": "eingebaute Datenfehler von der QC markiert. Nichts wird gelöscht."
+      }
+    },
+    {
+      "value": { "es": "5,1×", "en": "5.1×", "de": "5,1×" },
+      "label": {
+        "es": "La validación cruzada aleatoria subestima el error del IDW en este factor (1,7 a 5,1 según el método).",
+        "en": "Random CV understates the IDW error by this factor (1.7 to 5.1 by method).",
+        "de": "So stark unterschätzt zufällige CV den IDW-Fehler (1,7 bis 5,1 je Methode)."
+      }
+    }
+  ],
+
+  "story": {
+    "problem": {
+      "es": "Los mapas de Bouguer se construyen a menudo con subconjuntos de levantamientos antiguos. La densidad, el término de curvatura y la interpolación no están documentados y son inconsistentes. Rara vez se indica la incertidumbre, y la validación cruzada aleatoria hace que los mapas parezcan mejores de lo que son.",
+      "en": "Bouguer maps are often built from old survey subsets. Density, curvature term and gridding are undocumented and inconsistent. Uncertainty is rarely given, and random cross-validation makes maps look better than they are.",
+      "de": "Bouguer-Karten entstehen oft aus alten Teilmengen. Dichte, Krümmungsterm und Interpolation sind nicht dokumentiert und uneinheitlich. Eine Unsicherheit fehlt meist. Zufällige Kreuzvalidierung lässt Karten zu gut aussehen."
+    },
+    "approach": {
+      "es": "Un flujo de trabajo abierto en Python, guiado por pruebas: reducción según Hinze et al. (2005), un modo legacy con conciliación término a término, control de calidad basado en marcas y kriging con regresión (Matérn) bajo validación cruzada por bloques espaciales. Verificado con un benchmark sintético de verdad conocida.",
+      "en": "An open, test-driven Python workflow: reduction after Hinze et al. (2005), a legacy mode with term-by-term reconciliation, flag-based QC and regression kriging (Matérn) under spatial block cross-validation. Verified on a synthetic benchmark with known truth.",
+      "de": "Offener, testgetriebener Python-Workflow: Reduktion nach Hinze et al. (2005), Legacy-Modus mit Term-für-Term-Abgleich, QC mit Flags, Regressions-Kriging (Matérn) mit räumlicher Block-Kreuzvalidierung. Geprüft an einem synthetischen Benchmark mit bekannter Wahrheit."
+    },
+    "result": {
+      "es": "La conciliación recupera los defectos inyectados: densidad de 2300 en lugar de 2670 kg m⁻³ (hasta −4,08 mGal) y un término de curvatura con el signo invertido (hasta 0,75 mGal). Kriging, spline y fuentes equivalentes reducen el error del IDW entre un 62 y un 72 %. Solo el kriging ofrece una incertidumbre calibrada.",
+      "en": "The reconciliation recovers the injected defects: density 2300 instead of 2670 kg m⁻³ (up to −4.08 mGal) and a curvature term with inverted sign (up to 0.75 mGal). Kriging, spline and equivalent sources cut the IDW error by 62 to 72 %. Only kriging gives calibrated uncertainty.",
+      "de": "Der Abgleich findet die eingebauten Fehler: Dichte 2300 statt 2670 kg m⁻³ (bis −4,08 mGal) und einen Krümmungsterm mit falschem Vorzeichen (bis 0,75 mGal). Kriging, Spline und äquivalente Quellen senken den IDW-Fehler um 62 bis 72 %. Nur Kriging liefert eine kalibrierte Unsicherheit."
+    }
+  },
+
+  "meta": [
+    {
+      "label": { "es": "Autoría", "en": "Author", "de": "Autor" },
+      "value": {
+        "es": "Albert Johan Herrera, Universidad del Quindío (autor único según CITATION.cff).",
+        "en": "Albert Johan Herrera, Universidad del Quindío (sole author, CITATION.cff).",
+        "de": "Albert Johan Herrera, Universidad del Quindío (alleiniger Autor laut CITATION.cff)."
+      }
+    },
+    {
+      "label": { "es": "Paquete de Python", "en": "Python package", "de": "Python-Paket" },
+      "value": "gravanom 0.1.0, Python 3.12/3.13. NumPy, xarray, pyproj, Verde, Harmonica, Boule, GSTools. CLI: `ingest`, `qc`, `reduce`, `grid`."
+    },
+    {
+      "label": "API",
+      "value": {
+        "es": "Servicio FastAPI `/api/v1` con esquema OpenAPI y errores según RFC 9457. Docker Compose.",
+        "en": "FastAPI service `/api/v1` with OpenAPI schema and RFC 9457 errors. Docker Compose.",
+        "de": "FastAPI-Dienst `/api/v1` mit OpenAPI-Schema und Fehlern nach RFC 9457. Docker Compose."
+      }
+    },
+    {
+      "label": { "es": "Aplicación web", "en": "Web app", "de": "Web-App" },
+      "value": {
+        "es": "React + MapLibre, modo claro/oscuro, demo estática. Pruebas de aceptación con Playwright, AT-01 a AT-08.",
+        "en": "React + MapLibre, light/dark, static demo. Playwright acceptance tests AT-01 to AT-08.",
+        "de": "React + MapLibre, hell/dunkel, statische Demo. Playwright-Abnahmetests AT-01 bis AT-08."
+      }
+    },
+    {
+      "label": { "es": "Licencias", "en": "Licences", "de": "Lizenzen" },
+      "value": {
+        "es": "Código: BSD-3-Clause. Documentación y datos sintéticos: CC BY 4.0.",
+        "en": "Code: BSD-3-Clause. Documentation and synthetic data: CC BY 4.0.",
+        "de": "Code: BSD-3-Clause. Dokumentation und synthetische Daten: CC BY 4.0."
+      }
+    },
+    {
+      "label": { "es": "Sistema de referencia", "en": "Reference system", "de": "Bezugssystem" },
+      "value": "EPSG:9377"
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "figure",
+      "plate": true,
+      "narrow": true,
+      "title": { "es": "Levantamiento sintético", "en": "Synthetic survey", "de": "Synthetische Kampagne" },
+      "src": "assets/img/gravity-survey.jpg",
+      "alt": {
+        "es": "Mapa del levantamiento sintético: estaciones sobre travesías que se cruzan, en azul y rojo según el subconjunto, sobre la topografía en gris, con el contorno de la máscara de soporte de datos en naranja.",
+        "en": "Map of the synthetic survey: stations along crossing traverses, blue and red by subset, over grey topography, with the outline of the data-support mask in orange.",
+        "de": "Karte der synthetischen Kampagne: Stationen auf sich kreuzenden Traversen, blau und rot je Teilmenge, über grauer Topographie, mit dem Umriss der Datenstützungsmaske in Orange."
+      },
+      "caption": {
+        "es": "Levantamiento sintético: 1 996 estaciones en 20 travesías (subconjuntos históricos simulados A y B), topografía y máscara de soporte de datos (≤ 5 km, envolvente convexa). Ejes: EPSG:9377, km. Datos ficticios con verdad conocida.",
+        "en": "Synthetic survey: 1 996 stations on 20 traverses (simulated legacy subsets A and B), topography and data-support mask (≤ 5 km, convex hull). Axes: EPSG:9377, km. Fictitious data with known truth.",
+        "de": "Synthetische Kampagne: 1 996 Stationen auf 20 Traversen (simulierte Alt-Teilmengen A und B), Topographie und Datenstützungsmaske (≤ 5 km, konvexe Hülle). Achsen: EPSG:9377, km. Fiktive Daten mit bekannter Wahrheit."
+      },
+      "credit": {
+        "es": "Fuente: paper/figures/fig01_survey.png.",
+        "en": "Source: paper/figures/fig01_survey.png.",
+        "de": "Quelle: paper/figures/fig01_survey.png."
+      }
+    },
+    {
+      "type": "steps",
+      "title": {
+        "es": "Pipeline: de los registros históricos a una malla calibrada",
+        "en": "Pipeline: from legacy records to a calibrated grid",
+        "de": "Pipeline: von Altdaten zum kalibrierten Grid"
+      },
+      "intro": {
+        "es": "Cada etapa es un comando de la CLI, escribe un manifiesto con los hashes de entradas y salidas y está cubierta por pruebas. Modo legacy: las fórmulas de la hoja de cálculo se reproducen exactamente; la conciliación cierra a 2,3 × 10⁻¹⁰ mGal.",
+        "en": "Every stage is a CLI command, writes a manifest with input and output hashes, and is covered by tests. Legacy mode: spreadsheet formulas reproduced exactly; reconciliation closes to 2.3 × 10⁻¹⁰ mGal.",
+        "de": "Jede Stufe ist ein CLI-Befehl, schreibt ein Manifest mit Hashes der Ein- und Ausgaben und ist durch Tests abgedeckt. Legacy-Modus: Tabellenformeln exakt reproduziert; der Abgleich schließt auf 2,3 × 10⁻¹⁰ mGal."
+      },
+      "items": [
+        {
+          "title": { "es": "Ingesta", "en": "Ingest", "de": "Einlesen" },
+          "text": {
+            "es": "S1-S2 `ingest`. Armonizar los subconjuntos: 2 005 registros, 20 travesías.",
+            "en": "S1-S2 `ingest`. Harmonize subsets: 2 005 records, 20 traverses.",
+            "de": "S1-S2 `ingest`. Teilmengen harmonisieren: 2 005 Datensätze, 20 Traversen."
+          }
+        },
+        {
+          "title": { "es": "Control de calidad", "en": "Quality control", "de": "Qualitätskontrolle" },
+          "text": {
+            "es": "S3 `qc`. Marca, nunca borra: 9 de 9 defectos encontrados. Salida: `qc_report.json`.",
+            "en": "S3 `qc`. Flags, never deletes: 9 of 9 defects found. Output: `qc_report.json`.",
+            "de": "S3 `qc`. Flags, kein Löschen: 9 von 9 Fehlern erkannt. Ausgabe: `qc_report.json`."
+          }
+        },
+        {
+          "title": { "es": "Reducción", "en": "Reduction", "de": "Reduktion" },
+          "text": {
+            "es": "S4-S6 `reduce`. FAA, SBA y CBA con GRS80 según Hinze 2005. Mediana de σ de la CBA: 0,23 mGal.",
+            "en": "S4-S6 `reduce`. FAA, SBA, CBA with GRS80 after Hinze 2005. Median σ of CBA: 0.23 mGal.",
+            "de": "S4-S6 `reduce`. FAA, SBA, CBA mit GRS80 nach Hinze 2005. σ CBA Median 0,23 mGal."
+          }
+        },
+        {
+          "title": { "es": "Variograma y kriging", "en": "Variogram and kriging", "de": "Variogramm und Kriging" },
+          "text": {
+            "es": "S7-S9 `grid`. Matérn ν 1,5, ℓ 46 km, deriva de grado 2, en el CRS métrico EPSG:9377.",
+            "en": "S7-S9 `grid`. Matérn ν 1.5, ℓ 46 km, drift degree 2, in the metric CRS EPSG:9377.",
+            "de": "S7-S9 `grid`. Matérn ν 1,5, ℓ 46 km, Drift Grad 2, im metrischen CRS EPSG:9377."
+          }
+        },
+        {
+          "title": { "es": "Validación por bloques", "en": "Block validation", "de": "Block-Validierung" },
+          "text": {
+            "es": "Pliegues anidados 5 × 5 con bloques de 15 km. RMSE: 0,74 mGal.",
+            "en": "Nested 5 × 5 folds with 15 km blocks. RMSE 0.74 mGal.",
+            "de": "Verschachtelt 5 × 5 Folds mit 15-km-Blöcken. RMSE 0,74 mGal."
+          }
+        },
+        {
+          "title": { "es": "Incertidumbre calibrada", "en": "Calibrated uncertainty", "de": "Kalibrierte Unsicherheit" },
+          "text": {
+            "es": "Factor c = 0,73; sd(z) 0,90; cobertura 0,956. Máscara de soporte: 65 %.",
+            "en": "Factor c = 0.73; sd(z) 0.90; coverage 0.956. Support mask 65 %.",
+            "de": "Faktor c = 0,73; sd(z) 0,90; Überdeckung 0,956. Stützungsmaske 65 %."
+          }
+        },
+        {
+          "title": { "es": "Entrega", "en": "Delivery", "de": "Bereitstellung" },
+          "text": {
+            "es": "Servicio FastAPI `/api/v1` y aplicación React + MapLibre, con la procedencia de cada producto.",
+            "en": "FastAPI service `/api/v1` and React + MapLibre app, with provenance per product.",
+            "de": "FastAPI-Dienst `/api/v1` und React + MapLibre, mit Provenienz je Produkt."
+          }
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": { "es": "Validación", "en": "Validation", "de": "Validierung" },
+      "head": [
+        { "es": "Método", "en": "Method", "de": "Methode" },
+        { "es": "CV por bloques", "en": "Block CV", "de": "Block-CV" },
+        { "es": "CV aleatoria", "en": "Random CV", "de": "Zufalls-CV" },
+        { "es": "Factor", "en": "Factor", "de": "Faktor" }
+      ],
+      "rows": [
+        ["IDW (p 2, k 12)", { "es": "2,49", "en": "2.49", "de": "2,49" }, { "es": "0,49", "en": "0.49", "de": "0,49" }, { "es": "5,1×", "en": "5.1×", "de": "5,1×" }],
+        [{ "es": "Tendencia + spline", "en": "Trend + spline", "de": "Trend + Spline" }, { "es": "0,69", "en": "0.69", "de": "0,69" }, { "es": "0,40", "en": "0.40", "de": "0,40" }, { "es": "1,7×", "en": "1.7×", "de": "1,7×" }],
+        [{ "es": "Fuentes equivalentes", "en": "Equivalent sources", "de": "Äquivalente Quellen" }, { "es": "0,94", "en": "0.94", "de": "0,94" }, { "es": "0,38", "en": "0.38", "de": "0,38" }, { "es": "2,5×", "en": "2.5×", "de": "2,5×" }],
+        [{ "es": "Kriging con regresión", "en": "Regression kriging", "de": "Regressions-Kriging" }, { "es": "0,74", "en": "0.74", "de": "0,74" }, { "es": "0,38", "en": "0.38", "de": "0,38" }, { "es": "2,0×", "en": "2.0×", "de": "2,0×" }]
+      ],
+      "emphasis": 3,
+      "note": {
+        "es": "RMSE en mGal, validación cruzada externa de 5 pliegues con bloques de 15 km. La cobertura del kriging se mantiene entre 0,956 y 0,972 con 3 semillas y bloques de 10 y 25 km. Frente al campo verdadero: RMSE de 0,27 mGal.",
+        "en": "RMSE in mGal, outer 5-fold CV with 15 km blocks. Kriging coverage stays between 0.956 and 0.972 over 3 seeds and 10/25 km blocks. Against the true field: RMSE 0.27 mGal.",
+        "de": "RMSE in mGal, äußere 5-fach-CV mit 15-km-Blöcken. Die Kriging-Überdeckung bleibt zwischen 0,956 und 0,972 über 3 Seeds und 10/25-km-Blöcke. Gegen das wahre Feld: RMSE 0,27 mGal."
+      }
+    },
+    {
+      "type": "figure",
+      "plate": true,
+      "src": "assets/img/gravity-validation.png",
+      "alt": {
+        "es": "Tres paneles: barras de RMSE por método con validación por bloques y aleatoria; valores predichos frente a observados del kriging; histograma de errores estandarizados con la curva normal.",
+        "en": "Three panels: RMSE bars per method under block and random validation; predicted versus observed values for kriging; histogram of standardized errors with the normal curve.",
+        "de": "Drei Felder: RMSE-Balken je Methode bei Block- und Zufallsvalidierung; vorhergesagte gegen beobachtete Werte des Krigings; Histogramm der standardisierten Fehler mit Normalkurve."
+      },
+      "caption": {
+        "es": "Validación cruzada externa, 1 996 estaciones. (a) RMSE por método, bloques espaciales frente a aleatoria; (b) kriging sobre bloques reservados; (c) errores estandarizados con σ calibrada.",
+        "en": "Outer cross-validation, 1 996 stations. (a) RMSE per method, spatial blocks vs. random; (b) kriging on held-out blocks; (c) standardized errors with calibrated σ.",
+        "de": "Äußere Kreuzvalidierung, 1 996 Stationen. (a) RMSE je Methode, Blöcke gegen zufällig; (b) Kriging auf zurückgehaltenen Blöcken; (c) standardisierte Fehler mit kalibrierter σ."
+      },
+      "credit": {
+        "es": "Fuente: manuscrito, fig. 5.",
+        "en": "Source: paper, Fig. 5.",
+        "de": "Quelle: Manuskript, Abb. 5."
+      }
+    },
+    {
+      "type": "figure",
+      "plate": true,
+      "src": "assets/img/gravity-truth.jpg",
+      "alt": {
+        "es": "Tres mapas del benchmark sintético: anomalía de Bouguer verdadera, diferencia entre predicción y verdad, e incertidumbre calibrada, que crece entre las travesías.",
+        "en": "Three maps of the synthetic benchmark: true Bouguer anomaly, prediction minus truth, and calibrated uncertainty, which grows between traverses.",
+        "de": "Drei Karten des synthetischen Benchmarks: wahre Bouguer-Anomalie, Vorhersage minus Wahrheit und kalibrierte Unsicherheit, die zwischen den Traversen zunimmt."
+      },
+      "caption": {
+        "es": "Benchmark sintético: (a) CBA verdadera en la superficie topográfica; (b) predicción del kriging menos la verdad dentro de la máscara de soporte (RMSE de 0,27 mGal); (c) incertidumbre de predicción calibrada, mediana de 0,24 mGal y hasta 1,0 mGal entre travesías. EPSG:9377, km.",
+        "en": "Synthetic benchmark: (a) true CBA at the topographic surface; (b) kriging prediction minus truth inside the support mask (RMSE 0.27 mGal); (c) calibrated prediction uncertainty, median 0.24 mGal, up to 1.0 mGal between traverses. EPSG:9377, km.",
+        "de": "Synthetischer Benchmark: (a) wahre CBA an der Geländeoberfläche; (b) Kriging-Vorhersage minus Wahrheit innerhalb der Stützungsmaske (RMSE 0,27 mGal); (c) kalibrierte Vorhersageunsicherheit, Median 0,24 mGal, bis 1,0 mGal zwischen den Traversen. EPSG:9377, km."
+      },
+      "credit": {
+        "es": "Fuente: manuscrito, fig. 6.",
+        "en": "Source: paper, Fig. 6.",
+        "de": "Quelle: Manuskript, Abb. 6."
+      }
+    },
+    {
+      "type": "lists",
+      "items": [
+        {
+          "title": { "es": "Límites", "en": "Limits", "de": "Grenzen" },
+          "items": [
+            {
+              "es": "Solo benchmark sintético: no reproduce datums de gravedad desconocidos, sistemas de alturas, métodos de corrección topográfica, deriva ni errores correlacionados.",
+              "en": "Synthetic benchmark only: unknown gravity datums, height systems, terrain-correction methods, drift and correlated errors are not reproduced.",
+              "de": "Nur synthetischer Benchmark: unbekannte Schwere-Datums, Höhensysteme, Geländekorrektur-Verfahren, Drift und korrelierte Fehler bildet er nicht ab."
+            },
+            {
+              "es": "Los defectos históricos simulados no son exhaustivos. Una sola época, sin cambio temporal.",
+              "en": "Simulated legacy defects are not exhaustive. One epoch only, no temporal change.",
+              "de": "Die simulierten Altdaten-Fehler sind nicht vollständig. Nur eine Epoche, keine zeitliche Änderung."
+            },
+            {
+              "es": "La estimación de la densidad a partir de los datos falla con poco relieve; una regla lo marca y mantiene 2670 kg m⁻³.",
+              "en": "Density from the data fails in low relief; a rule flags this and keeps 2670 kg m⁻³.",
+              "de": "Die Dichteschätzung aus den Daten versagt bei geringem Relief; eine Regel markiert das und behält 2670 kg m⁻³."
+            },
+            {
+              "es": "Código y texto elaborados con asistencia de IA (Claude) y revisados por el autor, como se declara en el manuscrito.",
+              "en": "Code and text drafted with AI assistance (Claude) and reviewed by the author, as declared in the manuscript.",
+              "de": "Code und Text mit KI-Unterstützung (Claude) erstellt und vom Autor geprüft, wie im Manuskript erklärt."
+            }
+          ]
+        },
+        {
+          "title": { "es": "Aplicable a", "en": "Transferable to", "de": "Übertragbar auf" },
+          "items": [
+            {
+              "es": "**Procesamiento reproducible de geodatos.** Semillas, manifiestos de ejecución con hashes, ejecuciones idénticas byte a byte.",
+              "en": "**Reproducible geodata processing.** Seeds, run manifests with hashes, byte-identical runs.",
+              "de": "**Reproduzierbare Geodatenverarbeitung.** Seeds, Lauf-Manifeste mit Hashes, byte-identische Läufe."
+            },
+            {
+              "es": "**Control de calidad.** Marcas basadas en reglas; nada se borra en silencio.",
+              "en": "**Quality assurance.** Rule-based flags; nothing is deleted silently.",
+              "de": "**Qualitätssicherung.** Regelbasierte Flags; nichts wird still gelöscht."
+            },
+            {
+              "es": "**Geoestadística.** Validación por bloques, incertidumbre calibrada, máscaras de soporte.",
+              "en": "**Geostatistics.** Block validation, calibrated uncertainty, support masks.",
+              "de": "**Geostatistik.** Block-Validierung, kalibrierte Unsicherheit, Masken."
+            },
+            {
+              "es": "**Entrega mediante API y web.** Servicio REST, mapa web, procedencia de cada producto.",
+              "en": "**Delivery via API and web.** REST service, web map, provenance per product.",
+              "de": "**Bereitstellung über API und Web.** REST-Dienst, Webkarte, Provenienz je Produkt."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "credits": {
+    "es": "Figuras y cifras: repositorio static-gravity-anomalies-colombia, carpeta paper/. Los datos sintéticos están publicados bajo CC BY 4.0 y etiquetados como SYNTHETIC. Reducción según Hinze et al. (2005), Geophysics 70(4).",
+    "en": "Figures and numbers: static-gravity-anomalies-colombia repository, paper/ folder. Synthetic data are released under CC BY 4.0 and labelled SYNTHETIC. Reduction after Hinze et al. (2005), Geophysics 70(4).",
+    "de": "Abbildungen und Zahlen: Repository static-gravity-anomalies-colombia, Ordner paper/. Die synthetischen Daten stehen unter CC BY 4.0 und sind als SYNTHETIC gekennzeichnet. Reduktion nach Hinze et al. (2005), Geophysics 70(4)."
+  }
+}
